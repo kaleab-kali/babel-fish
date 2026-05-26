@@ -14,7 +14,7 @@ The project starts with deterministic fixture mode so contributors can build and
 
 ## Current Status
 
-Babel Fish is pre-release. The repository has an initial Dart workspace and the first reusable package, `babelfish_core`, for platform-neutral models and service contracts.
+Babel Fish is pre-release. The repository has an initial Dart workspace with platform-neutral core contracts and offline fixture services.
 
 The first supported mode will be fixture mode:
 
@@ -55,7 +55,7 @@ The project is split into small packages so each part can be tested and reviewed
 
 `babelfish_core` will contain pure Dart models and contracts such as languages, transcript segments, translation results, speech sessions, latency measurements, transcription services, and translation services.
 
-`babelfish_fixtures` will provide deterministic demo data and local service implementations.
+`babelfish_fixtures` provides deterministic demo data and local service implementations for offline transcript and translation flows.
 
 `babelfish_providers` will contain optional live provider adapters. Provider credentials must be configured locally and must never be committed.
 
@@ -75,6 +75,7 @@ Run the current checks:
 dart format --set-exit-if-changed .
 dart analyze
 dart test packages/babelfish_core
+dart test packages/babelfish_fixtures
 ```
 
 The runnable Flutter app is not committed yet. Once the app scaffold lands, `flutter run` will become part of the standard setup path.

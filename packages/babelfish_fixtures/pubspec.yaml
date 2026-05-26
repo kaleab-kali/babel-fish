@@ -1,0 +1,15 @@
+name: babelfish_fixtures
+description: Offline demo fixtures and service implementations for Babel Fish.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+
+resolution: workspace
+
+dependencies:
+  babelfish_core: ^0.1.0
+
+dev_dependencies:
+  test: ^1.26.0

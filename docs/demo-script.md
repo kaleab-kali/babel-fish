@@ -12,6 +12,12 @@ This document will track the repeatable portfolio demo.
 6. Open the latency overlay.
 7. Copy the translated text.
 
+Initial fixture language pairs:
+
+- English to Amharic.
+- English to French.
+- Amharic to English.
+
 ## Live provider demo
 
 Live provider mode is planned after fixture mode is stable.
