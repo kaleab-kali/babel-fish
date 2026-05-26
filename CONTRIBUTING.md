@@ -31,11 +31,11 @@ dart test packages/babelfish_fixtures
 
 Pull requests run the same Dart workspace checks in GitHub Actions.
 
-When the Flutter app exists, app checks will include:
+For Flutter app work, run:
 
 ```sh
+cd app
 flutter pub get
-flutter analyze
 flutter test
 ```
 
