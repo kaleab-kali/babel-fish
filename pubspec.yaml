@@ -1,0 +1,12 @@
+name: babel_fish_workspace
+description: Workspace for the Babel Fish Flutter app and Dart packages.
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+
+workspace:
+  - packages/babelfish_core
+
+dev_dependencies:
+  lints: ^6.0.0

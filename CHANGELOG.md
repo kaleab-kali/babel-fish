@@ -7,3 +7,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 ## Unreleased
 
 - Added open-source project foundation files.
+- Added initial Dart workspace and `babelfish_core` package scaffold.

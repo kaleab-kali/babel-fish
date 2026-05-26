@@ -14,9 +14,21 @@ The project is early and intentionally fixture-first. Contributions should keep 
 
 ## Local workflow
 
-The first runnable Flutter scaffold is still being added. Until then, changes should be limited to project structure, docs, and pure Dart package setup.
+Fetch dependencies:
 
-When the app exists, the expected workflow will be:
+```sh
+dart pub get
+```
+
+For current Dart package work, run:
+
+```sh
+dart format --set-exit-if-changed .
+dart analyze
+dart test packages/babelfish_core
+```
+
+When the Flutter app exists, app checks will include:
 
 ```sh
 flutter pub get
