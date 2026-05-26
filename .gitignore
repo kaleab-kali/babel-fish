@@ -1,0 +1,28 @@
+# Dart and Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Generated coverage and reports
+coverage/
+reports/
+
+# Local demo artifacts
+docs/screenshots/local/
+recordings/
