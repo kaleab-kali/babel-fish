@@ -26,6 +26,7 @@ For current Dart package work, run:
 dart format --set-exit-if-changed .
 dart analyze
 dart test packages/babelfish_core
+dart test packages/babelfish_fixtures
 ```
 
 When the Flutter app exists, app checks will include:
