@@ -39,6 +39,8 @@ flutter pub get
 flutter test
 ```
 
+Flutter app changes also run app-specific GitHub Actions checks.
+
 ## Pull request checklist
 
 - The change is small enough to review.
