@@ -1,0 +1,27 @@
+name: babel_fish_app
+description: Flutter demo app for the Babel Fish fixture caption flow.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  babelfish_core:
+    path: ../packages/babelfish_core
+  babelfish_fixtures:
+    path: ../packages/babelfish_fixtures
+  flutter:
+    sdk: flutter
+
+dependency_overrides:
+  babelfish_core:
+    path: ../packages/babelfish_core
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

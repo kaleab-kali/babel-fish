@@ -1,0 +1,53 @@
+name: Flutter App
+
+on:
+  pull_request:
+    paths:
+      - app/**
+      - packages/**
+      - .github/workflows/flutter-app.yml
+  push:
+    branches:
+      - main
+    paths:
+      - app/**
+      - packages/**
+      - .github/workflows/flutter-app.yml
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Format, analyze, and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Show Flutter version
+        working-directory: app
+        run: flutter --version
+
+      - name: Install app dependencies
+        working-directory: app
+        run: flutter pub get
+
+      - name: Check app formatting
+        working-directory: app
+        run: dart format --set-exit-if-changed .
+
+      - name: Analyze app
+        working-directory: app
+        run: dart analyze
+
+      - name: Test app
+        working-directory: app
+        run: flutter test

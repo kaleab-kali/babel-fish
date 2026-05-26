@@ -1,6 +1,7 @@
 # Babel Fish
 
 [![Dart Workspace](https://github.com/kaleab-kali/babel-fish/actions/workflows/dart-workspace.yml/badge.svg)](https://github.com/kaleab-kali/babel-fish/actions/workflows/dart-workspace.yml)
+[![Flutter App](https://github.com/kaleab-kali/babel-fish/actions/workflows/flutter-app.yml/badge.svg)](https://github.com/kaleab-kali/babel-fish/actions/workflows/flutter-app.yml)
 
 Babel Fish is an open-source Flutter prototype for real-time speech translation. It is designed to capture speech, transcribe it, translate it, and show readable captions with clear latency reporting.
 
@@ -25,7 +26,7 @@ The first supported mode will be fixture mode:
 - No real user audio required.
 - Predictable transcript and translation data for demos and tests.
 
-The Flutter demo app, live provider mode, and on-device model support are planned after the core contracts and fixture path are stable.
+The Flutter demo app has an initial web-capable fixture flow. Live provider mode and on-device model support are planned after the fixture app path is stable.
 
 ## Planned Features
 
@@ -61,7 +62,7 @@ The project is split into small packages so each part can be tested and reviewed
 
 `babelfish_providers` will contain optional live provider adapters. Provider credentials must be configured locally and must never be committed.
 
-`app` will be the Flutter demo that connects the packages into a usable push-to-talk caption experience.
+`app` is the Flutter demo that connects the packages into a fixture-backed caption experience.
 
 ## Getting Started
 
@@ -80,9 +81,16 @@ dart test packages/babelfish_core
 dart test packages/babelfish_fixtures
 ```
 
-The runnable Flutter app is not committed yet. Once the app scaffold lands, `flutter run` will become part of the standard setup path.
+Run the Flutter fixture demo:
 
-The same Dart workspace checks run in GitHub Actions for pushes to `main` and pull requests.
+```sh
+cd app
+flutter pub get
+flutter test
+flutter run -d chrome
+```
+
+The same Dart workspace and Flutter app checks run in GitHub Actions for pushes to `main` and pull requests.
 
 ## Privacy
 
