@@ -40,3 +40,6 @@ jobs:
 
       - name: Test fixtures package
         run: dart test packages/babelfish_fixtures
+
+      - name: Test providers package
+        run: dart test packages/babelfish_providers

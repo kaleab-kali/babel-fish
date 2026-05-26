@@ -8,6 +8,7 @@ environment:
 workspace:
   - packages/babelfish_core
   - packages/babelfish_fixtures
+  - packages/babelfish_providers
 
 dev_dependencies:
   lints: ^6.0.0

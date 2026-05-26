@@ -27,6 +27,7 @@ dart format --set-exit-if-changed .
 dart analyze
 dart test packages/babelfish_core
 dart test packages/babelfish_fixtures
+dart test packages/babelfish_providers
 ```
 
 Pull requests run the same Dart workspace checks in GitHub Actions.
