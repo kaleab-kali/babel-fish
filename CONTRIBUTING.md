@@ -29,6 +29,8 @@ dart test packages/babelfish_core
 dart test packages/babelfish_fixtures
 ```
 
+Pull requests run the same Dart workspace checks in GitHub Actions.
+
 When the Flutter app exists, app checks will include:
 
 ```sh
