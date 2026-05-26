@@ -8,8 +8,9 @@ These notes capture repository-specific working rules for coding agents.
 - Use branch names that describe the functional change, not internal phases.
 - Use commit messages and pull request titles that describe the functional change.
 - Do not use phase-style names such as "phase 1" or "foundation phase".
+- Merge pull requests with normal merge commits only unless the maintainer explicitly asks for another strategy.
 - Do not squash-merge pull requests unless the maintainer explicitly asks for it.
-- Prefer normal merge commits when merging completed pull requests.
+- Do not delete local or remote branches after merge unless the maintainer explicitly asks for branch deletion.
 - Keep commits clean and focused.
 
 ## Attribution
