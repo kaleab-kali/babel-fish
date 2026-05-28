@@ -91,6 +91,8 @@ flutter test
 flutter run -d chrome
 ```
 
+For the current walkthrough, see [docs/demo-script.md](docs/demo-script.md).
+
 The same Dart workspace and Flutter app checks run in GitHub Actions for pushes to `main` and pull requests.
 
 ## Privacy
