@@ -2,6 +2,8 @@
 
 Flutter demo app for the Babel Fish fixture caption flow.
 
+The app currently supports fixture-backed language pair selection for English, French, and Amharic demo data.
+
 ## Run
 
 ```sh

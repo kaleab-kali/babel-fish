@@ -62,7 +62,7 @@ The project is split into small packages so each part can be tested and reviewed
 
 `babelfish_providers` contains live-provider adapter scaffolding. Provider credentials must be configured locally and must never be committed.
 
-`app` is the Flutter demo that connects the packages into a fixture-backed caption experience.
+`app` is the Flutter demo that connects the packages into a fixture-backed caption experience with deterministic language-pair selection.
 
 ## Getting Started
 

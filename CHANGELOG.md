@@ -13,3 +13,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added initial Flutter fixture caption demo app.
 - Added GitHub Actions checks for the Flutter app.
 - Added `babelfish_providers` package scaffold for future live adapters.
+- Added fixture language-pair selection to the Flutter demo app.
