@@ -106,6 +106,16 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
     _error = null;
   }
 
+  void _clearHistory() {
+    if (_history.isEmpty) {
+      return;
+    }
+
+    setState(() {
+      _history.clear();
+    });
+  }
+
   Future<void> _copyTranslation() async {
     final translation = _translation;
     if (translation == null) {
@@ -232,7 +242,7 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
             _LatencyPanel(latency: _latency),
             if (_history.isNotEmpty) ...[
               const SizedBox(height: 20),
-              _HistoryList(results: _history),
+              _HistoryList(results: _history, onClear: _clearHistory),
             ],
             if (_error != null) ...[
               const SizedBox(height: 20),
@@ -473,9 +483,10 @@ class _LatencyChip extends StatelessWidget {
 }
 
 class _HistoryList extends StatelessWidget {
-  const _HistoryList({required this.results});
+  const _HistoryList({required this.results, required this.onClear});
 
   final List<TranslationResult> results;
+  final VoidCallback onClear;
 
   @override
   Widget build(BuildContext context) {
@@ -485,7 +496,17 @@ class _HistoryList extends StatelessWidget {
       key: const Key('caption-history-list'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('History', style: textTheme.titleMedium),
+        Row(
+          children: [
+            Expanded(child: Text('History', style: textTheme.titleMedium)),
+            TextButton.icon(
+              key: const Key('clear-caption-history-button'),
+              onPressed: onClear,
+              icon: const Icon(Icons.delete_sweep),
+              label: const Text('Clear'),
+            ),
+          ],
+        ),
         const SizedBox(height: 8),
         for (final (index, result) in results.indexed) ...[
           _HistoryItem(key: Key('caption-history-item-$index'), result: result),

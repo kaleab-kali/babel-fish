@@ -62,7 +62,7 @@ The project is split into small packages so each part can be tested and reviewed
 
 `babelfish_providers` contains live-provider adapter scaffolding. Provider credentials must be configured locally and must never be committed.
 
-`app` is the Flutter application that connects the packages into a fixture-backed caption experience with deterministic language-pair selection, translated-text copy support, in-session caption history, and a visible offline fixture-mode status. The app keeps standard Flutter platform scaffolds for Android, iOS, Linux, macOS, web, and Windows so the speech experience can grow beyond the browser demo.
+`app` is the Flutter application that connects the packages into a fixture-backed caption experience with deterministic language-pair selection, translated-text copy support, clearable in-session caption history, and a visible offline fixture-mode status. The app keeps standard Flutter platform scaffolds for Android, iOS, Linux, macOS, web, and Windows so the speech experience can grow beyond the browser demo.
 
 ## Getting Started
 
