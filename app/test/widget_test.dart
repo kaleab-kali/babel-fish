@@ -1,5 +1,6 @@
 import 'package:babel_fish_app/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -46,5 +47,34 @@ void main() {
 
     expect(find.text('ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።'), findsOneWidget);
     expect(find.text('Hello, welcome to Babel Fish.'), findsOneWidget);
+  });
+
+  testWidgets('copies the translated caption', (tester) async {
+    final platformCalls = <MethodCall>[];
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(SystemChannels.platform, (call) async {
+          if (call.method == 'Clipboard.setData') {
+            platformCalls.add(call);
+          }
+          return null;
+        });
+    addTearDown(() {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(SystemChannels.platform, null);
+    });
+
+    await tester.pumpWidget(const BabelFishApp());
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('copy-translation-button')));
+    await tester.pump();
+
+    expect(platformCalls, hasLength(1));
+    expect(
+      platformCalls.single.arguments,
+      containsPair('text', 'ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።'),
+    );
+    expect(find.text('Copied translation'), findsOneWidget);
   });
 }

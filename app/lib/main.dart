@@ -1,6 +1,7 @@
 import 'package:babelfish_core/babelfish_core.dart';
 import 'package:babelfish_fixtures/babelfish_fixtures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const BabelFishApp());
@@ -104,6 +105,23 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
     _error = null;
   }
 
+  Future<void> _copyTranslation() async {
+    final translation = _translation;
+    if (translation == null) {
+      return;
+    }
+
+    await Clipboard.setData(ClipboardData(text: translation.text));
+
+    if (!mounted) {
+      return;
+    }
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Copied translation')));
+  }
+
   Future<void> _playFixture() async {
     final captureStartedAt = DateTime.now().toUtc();
     setState(() {
@@ -195,6 +213,16 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
             _CaptionPanel(
               label: 'Translation',
               text: _translation?.text ?? 'No translated caption yet.',
+            ),
+            const SizedBox(height: 12),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                key: const Key('copy-translation-button'),
+                onPressed: _translation == null ? null : _copyTranslation,
+                icon: const Icon(Icons.copy),
+                label: const Text('Copy translation'),
+              ),
             ),
             const SizedBox(height: 20),
             _LatencyPanel(latency: _latency),
