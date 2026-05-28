@@ -14,8 +14,8 @@ void main() {
     await tester.tap(find.byIcon(Icons.mic));
     await tester.pumpAndSettle();
 
-    expect(find.text('Hello, welcome to Babel Fish.'), findsOneWidget);
-    expect(find.text('ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።'), findsOneWidget);
+    expect(find.text('Hello, welcome to Babel Fish.'), findsWidgets);
+    expect(find.text('ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።'), findsWidgets);
     expect(find.textContaining('Perceived'), findsOneWidget);
   });
 
@@ -30,8 +30,8 @@ void main() {
     await tester.tap(find.byIcon(Icons.mic));
     await tester.pumpAndSettle();
 
-    expect(find.text('Hello, welcome to Babel Fish.'), findsOneWidget);
-    expect(find.text('Bonjour, bienvenue dans Babel Fish.'), findsOneWidget);
+    expect(find.text('Hello, welcome to Babel Fish.'), findsWidgets);
+    expect(find.text('Bonjour, bienvenue dans Babel Fish.'), findsWidgets);
   });
 
   testWidgets('switches the fixture source language', (tester) async {
@@ -45,8 +45,8 @@ void main() {
     await tester.tap(find.byIcon(Icons.mic));
     await tester.pumpAndSettle();
 
-    expect(find.text('ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።'), findsOneWidget);
-    expect(find.text('Hello, welcome to Babel Fish.'), findsOneWidget);
+    expect(find.text('ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።'), findsWidgets);
+    expect(find.text('Hello, welcome to Babel Fish.'), findsWidgets);
   });
 
   testWidgets('copies the translated caption', (tester) async {
@@ -76,5 +76,48 @@ void main() {
       containsPair('text', 'ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።'),
     );
     expect(find.text('Copied translation'), findsOneWidget);
+  });
+
+  testWidgets('records completed fixture translations in history', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const BabelFishApp());
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('caption-history-list')),
+      300,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('caption-history-list')), findsOneWidget);
+    expect(find.byKey(const Key('caption-history-item-0')), findsOneWidget);
+
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('target-language-dropdown')),
+      -300,
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('target-language-dropdown')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('French (Francais)').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('caption-history-item-1')),
+      300,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('caption-history-item-0')), findsOneWidget);
+    expect(find.byKey(const Key('caption-history-item-1')), findsOneWidget);
+    expect(find.text('Bonjour, bienvenue dans Babel Fish.'), findsWidgets);
+    expect(find.textContaining('English -> French'), findsOneWidget);
+    expect(find.textContaining('English -> Amharic'), findsOneWidget);
   });
 }

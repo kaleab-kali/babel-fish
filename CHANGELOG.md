@@ -15,3 +15,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added `babelfish_providers` package scaffold for future live adapters.
 - Added fixture language-pair selection to the Flutter demo app.
 - Added translated-caption copy support to the Flutter demo app.
+- Added in-session caption history to the Flutter demo app.
