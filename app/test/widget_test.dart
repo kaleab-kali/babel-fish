@@ -126,4 +126,23 @@ void main() {
     expect(find.textContaining('English -> French'), findsOneWidget);
     expect(find.textContaining('English -> Amharic'), findsOneWidget);
   });
+
+  testWidgets('clears completed fixture translation history', (tester) async {
+    await tester.pumpWidget(const BabelFishApp());
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('clear-caption-history-button')),
+      300,
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('clear-caption-history-button')));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('caption-history-list')), findsNothing);
+    expect(find.text('Hello, welcome to Babel Fish.'), findsOneWidget);
+  });
 }

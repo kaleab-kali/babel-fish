@@ -13,6 +13,7 @@ and portfolio walkthroughs.
 6. Confirm latency chips are shown for transcript, translation, render, and perceived latency.
 7. Copy the translated text.
 8. Run another fixture language pair and confirm the completed captions appear in history.
+9. Clear the history and confirm the current captions remain visible.
 
 Initial fixture language pairs:
 

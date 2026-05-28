@@ -21,3 +21,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added the Flutter app dependency that provides the Cupertino icon font asset.
 - Added Flutter web build verification to the app CI workflow.
 - Regenerated the Flutter app scaffold with standard Android, iOS, Linux, macOS, web, and Windows platform folders.
+- Added a clear action for the Flutter demo app's in-session caption history.
