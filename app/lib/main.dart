@@ -192,6 +192,8 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
+            const _FixtureModeBanner(),
+            const SizedBox(height: 20),
             _LanguageSelector(
               sourceLanguage: _sourceLanguage,
               targetLanguage: _targetLanguage,
@@ -236,6 +238,53 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
               const SizedBox(height: 20),
               Text(_error!, style: TextStyle(color: colorScheme.error)),
             ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _FixtureModeBanner extends StatelessWidget {
+  const _FixtureModeBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return DecoratedBox(
+      key: const Key('fixture-mode-banner'),
+      decoration: BoxDecoration(
+        color: colorScheme.tertiaryContainer,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Row(
+          children: [
+            Icon(Icons.cloud_off, color: colorScheme.onTertiaryContainer),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Fixture mode',
+                    style: textTheme.titleSmall?.copyWith(
+                      color: colorScheme.onTertiaryContainer,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    'Offline demo data only. No microphone, network, or API keys.',
+                    style: textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onTertiaryContainer,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

@@ -8,6 +8,12 @@ void main() {
     await tester.pumpWidget(const BabelFishApp());
 
     expect(find.text('Babel Fish'), findsOneWidget);
+    expect(find.byKey(const Key('fixture-mode-banner')), findsOneWidget);
+    expect(find.text('Fixture mode'), findsOneWidget);
+    expect(
+      find.text('Offline demo data only. No microphone, network, or API keys.'),
+      findsOneWidget,
+    );
     expect(find.text('No source caption yet.'), findsOneWidget);
     expect(find.text('No translated caption yet.'), findsOneWidget);
 
