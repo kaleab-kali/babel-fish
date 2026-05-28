@@ -11,6 +11,7 @@ dependencies:
     path: ../packages/babelfish_core
   babelfish_fixtures:
     path: ../packages/babelfish_fixtures
+  cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
 
