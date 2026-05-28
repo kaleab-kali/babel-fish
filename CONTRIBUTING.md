@@ -42,7 +42,7 @@ flutter test
 flutter build web
 ```
 
-Flutter app changes also run app-specific GitHub Actions checks.
+Flutter app changes also run app-specific GitHub Actions checks. The repository keeps generated Flutter platform scaffolds checked in; use Flutter tooling to repair or update those folders instead of hand-writing platform boilerplate.
 
 ## Pull request checklist
 
