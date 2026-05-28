@@ -39,6 +39,7 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
 
   late BabelLanguage _sourceLanguage;
   late BabelLanguage _targetLanguage;
+  final List<TranslationResult> _history = [];
   TranscriptSegment? _sourceSegment;
   TranslationResult? _translation;
   LatencyMeasurement? _latency;
@@ -157,6 +158,7 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
       setState(() {
         _sourceSegment = sourceSegment;
         _translation = translation;
+        _history.insert(0, translation);
         _latency = LatencyMeasurement(
           captureStartedAt: captureStartedAt,
           transcriptAvailableAt: transcriptAvailableAt,
@@ -226,6 +228,10 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
             ),
             const SizedBox(height: 20),
             _LatencyPanel(latency: _latency),
+            if (_history.isNotEmpty) ...[
+              const SizedBox(height: 20),
+              _HistoryList(results: _history),
+            ],
             if (_error != null) ...[
               const SizedBox(height: 20),
               Text(_error!, style: TextStyle(color: colorScheme.error)),
@@ -413,6 +419,66 @@ class _LatencyChip extends StatelessWidget {
     return Chip(
       avatar: const Icon(Icons.speed, size: 18),
       label: Text('$label $value'),
+    );
+  }
+}
+
+class _HistoryList extends StatelessWidget {
+  const _HistoryList({required this.results});
+
+  final List<TranslationResult> results;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Column(
+      key: const Key('caption-history-list'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('History', style: textTheme.titleMedium),
+        const SizedBox(height: 8),
+        for (final (index, result) in results.indexed) ...[
+          _HistoryItem(key: Key('caption-history-item-$index'), result: result),
+          if (index != results.length - 1) const SizedBox(height: 8),
+        ],
+      ],
+    );
+  }
+}
+
+class _HistoryItem extends StatelessWidget {
+  const _HistoryItem({super.key, required this.result});
+
+  final TranslationResult result;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${result.sourceSegment.language.name} -> '
+              '${result.targetLanguage.name}',
+              style: textTheme.labelMedium,
+            ),
+            const SizedBox(height: 6),
+            Text(result.sourceSegment.text, style: textTheme.bodyMedium),
+            const SizedBox(height: 4),
+            Text(result.text, style: textTheme.bodyLarge),
+          ],
+        ),
+      ),
     );
   }
 }
