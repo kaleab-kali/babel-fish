@@ -51,3 +51,7 @@ jobs:
       - name: Test app
         working-directory: app
         run: flutter test
+
+      - name: Build web app
+        working-directory: app
+        run: flutter build web

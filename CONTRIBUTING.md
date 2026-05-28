@@ -37,7 +37,9 @@ For Flutter app work, run:
 ```sh
 cd app
 flutter pub get
+dart analyze
 flutter test
+flutter build web
 ```
 
 Flutter app changes also run app-specific GitHub Actions checks.

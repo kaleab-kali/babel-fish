@@ -19,3 +19,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added a visible offline fixture-mode status to the Flutter demo app.
 - Updated the fixture demo script for the current Flutter app flow.
 - Added the Flutter app dependency that provides the Cupertino icon font asset.
+- Added Flutter web build verification to the app CI workflow.
