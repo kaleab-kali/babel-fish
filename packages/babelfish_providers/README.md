@@ -6,7 +6,7 @@ This package is intentionally small for now. It contains scaffolding for live au
 
 ## Current contents
 
-- Provider adapter metadata.
+- Provider adapter metadata with immutable capability declarations.
 - Provider capability metadata for audio capture, transcription, and translation.
 - Provider adapter catalog lookup and capability filtering.
 - Explicit unavailable audio capture, transcription, and translation service implementations.
