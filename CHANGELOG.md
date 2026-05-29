@@ -24,3 +24,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added a clear action for the Flutter demo app's in-session caption history.
 - Added platform-neutral audio capture contracts to `babelfish_core`.
 - Added deterministic fixture audio capture service and wired the Flutter demo to use it.
+- Added unavailable provider audio capture adapter scaffold.
