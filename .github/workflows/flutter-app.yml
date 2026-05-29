@@ -55,3 +55,7 @@ jobs:
       - name: Build web app
         working-directory: app
         run: flutter build web
+
+      - name: Build Android debug app
+        working-directory: app
+        run: flutter build apk --debug
