@@ -27,3 +27,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added unavailable provider audio capture adapter scaffold.
 - Added Android debug build verification to the Flutter app CI workflow.
 - Documented the platform microphone permission boundary for fixture mode.
+- Added provider capability metadata for future live adapter declarations.
