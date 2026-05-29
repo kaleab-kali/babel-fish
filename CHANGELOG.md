@@ -22,3 +22,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added Flutter web build verification to the app CI workflow.
 - Regenerated the Flutter app scaffold with standard Android, iOS, Linux, macOS, web, and Windows platform folders.
 - Added a clear action for the Flutter demo app's in-session caption history.
+- Added platform-neutral audio capture contracts to `babelfish_core`.

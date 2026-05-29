@@ -1,5 +1,7 @@
+export 'src/audio_capture_config.dart';
 export 'src/babel_language.dart';
 export 'src/latency_measurement.dart';
+export 'src/services/audio_capture_service.dart';
 export 'src/services/transcription_service.dart';
 export 'src/services/translation_service.dart';
 export 'src/speech_session.dart';

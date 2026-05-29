@@ -56,7 +56,7 @@ babel-fish/
 
 The project is split into small packages so each part can be tested and reviewed independently.
 
-`babelfish_core` will contain pure Dart models and contracts such as languages, transcript segments, translation results, speech sessions, latency measurements, transcription services, and translation services.
+`babelfish_core` will contain pure Dart models and contracts such as languages, audio capture configuration, transcript segments, translation results, speech sessions, latency measurements, audio capture services, transcription services, and translation services.
 
 `babelfish_fixtures` provides deterministic demo data and local service implementations for offline transcript and translation flows.
 
