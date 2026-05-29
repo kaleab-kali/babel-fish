@@ -13,6 +13,26 @@ void main() {
   const english = BabelLanguage(code: 'en', name: 'English');
   const french = BabelLanguage(code: 'fr', name: 'French');
 
+  group('UnavailableAudioCaptureService', () {
+    test('throws an explicit provider exception', () {
+      const service = UnavailableAudioCaptureService(provider: provider);
+      final session = SpeechSession(
+        id: 'session',
+        sourceLanguage: english,
+        targetLanguage: french,
+        startedAt: DateTime.utc(2026, 1, 1),
+      );
+
+      expect(
+        () => service.capture(
+          session: session,
+          config: const AudioCaptureConfig(),
+        ),
+        throwsA(isA<ProviderUnavailableException>()),
+      );
+    });
+  });
+
   group('UnavailableTranscriptionService', () {
     test('throws an explicit provider exception', () {
       const service = UnavailableTranscriptionService(provider: provider);
