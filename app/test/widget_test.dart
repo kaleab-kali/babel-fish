@@ -15,14 +15,19 @@ void main() {
       find.text('Offline demo data only. No microphone, network, or API keys.'),
       findsOneWidget,
     );
+    expect(find.text('Session idle'), findsOneWidget);
     expect(find.text('No source caption yet.'), findsOneWidget);
     expect(find.text('No translated caption yet.'), findsOneWidget);
 
     await tester.tap(find.byIcon(Icons.mic));
     await tester.pumpAndSettle();
 
+    expect(find.text('Session completed'), findsOneWidget);
     expect(find.text('Hello, welcome to Babel Fish.'), findsWidgets);
     expect(find.text('ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።'), findsWidgets);
+    await tester.scrollUntilVisible(find.textContaining('Perceived'), 300);
+    await tester.pumpAndSettle();
+
     expect(find.textContaining('Perceived'), findsOneWidget);
   });
 
@@ -73,6 +78,11 @@ void main() {
     await tester.pumpWidget(const BabelFishApp());
 
     await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('copy-translation-button')),
+      300,
+    );
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('copy-translation-button')));
     await tester.pump();
@@ -166,6 +176,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('translation unavailable'), findsOneWidget);
+    expect(find.text('Session failed'), findsOneWidget);
     expect(find.text('No translated caption yet.'), findsOneWidget);
   });
 }
