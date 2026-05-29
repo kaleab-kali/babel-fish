@@ -58,7 +58,7 @@ The project is split into small packages so each part can be tested and reviewed
 
 `babelfish_core` will contain pure Dart models and contracts such as languages, audio capture configuration, transcript segments, translation results, speech sessions, latency measurements, audio capture services, transcription services, and translation services.
 
-`babelfish_fixtures` provides deterministic demo data and local service implementations for offline transcript and translation flows.
+`babelfish_fixtures` provides deterministic demo data and local service implementations for offline audio capture, transcript, and translation flows.
 
 `babelfish_providers` contains live-provider adapter scaffolding. Provider credentials must be configured locally and must never be committed.
 
