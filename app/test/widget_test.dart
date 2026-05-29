@@ -61,6 +61,29 @@ void main() {
     expect(find.text('Hello, welcome to Babel Fish.'), findsWidgets);
   });
 
+  testWidgets('advances through fixture transcript segments', (tester) async {
+    await tester.pumpWidget(const BabelFishApp());
+
+    await tester.tap(find.byKey(const Key('target-language-dropdown')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('French (Francais)').last);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text('This offline demo keeps captions predictable.'),
+      findsWidgets,
+    );
+    expect(
+      find.text('Cette demo hors ligne garde les sous-titres previsibles.'),
+      findsWidgets,
+    );
+  });
+
   testWidgets('copies the translated caption', (tester) async {
     final platformCalls = <MethodCall>[];
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -133,7 +156,10 @@ void main() {
 
     expect(find.byKey(const Key('caption-history-item-0')), findsOneWidget);
     expect(find.byKey(const Key('caption-history-item-1')), findsOneWidget);
-    expect(find.text('Bonjour, bienvenue dans Babel Fish.'), findsWidgets);
+    expect(
+      find.text('Cette demo hors ligne garde les sous-titres previsibles.'),
+      findsWidgets,
+    );
     expect(find.textContaining('English -> French'), findsOneWidget);
     expect(find.textContaining('English -> Amharic'), findsOneWidget);
   });

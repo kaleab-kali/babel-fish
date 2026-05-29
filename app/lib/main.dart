@@ -44,6 +44,7 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
   late BabelLanguage _sourceLanguage;
   late BabelLanguage _targetLanguage;
   final List<TranslationResult> _history = [];
+  final Map<BabelLanguage, int> _nextSegmentIndexes = {};
   SpeechSession? _session;
   TranscriptSegment? _sourceSegment;
   TranslationResult? _translation;
@@ -122,6 +123,18 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
     });
   }
 
+  TranscriptSegment _selectNextSegment(List<TranscriptSegment> segments) {
+    if (segments.isEmpty) {
+      throw StateError(
+        'No fixture transcript segments for ${_sourceLanguage.displayName}.',
+      );
+    }
+
+    final index = _nextSegmentIndexes[_sourceLanguage] ?? 0;
+    _nextSegmentIndexes[_sourceLanguage] = (index + 1) % segments.length;
+    return segments[index % segments.length];
+  }
+
   Future<void> _copyTranslation() async {
     final translation = _translation;
     if (translation == null) {
@@ -165,14 +178,15 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
         _session = transcribingSession;
       });
 
-      final sourceSegment = await widget.transcriptionService
+      final sourceSegments = await widget.transcriptionService
           .transcribe(
             session: transcribingSession,
             audioBytes: widget.audioCaptureService.capture(
               session: transcribingSession,
             ),
           )
-          .first;
+          .toList();
+      final sourceSegment = _selectNextSegment(sourceSegments);
       final transcriptAvailableAt = DateTime.now().toUtc();
 
       if (!mounted) {
