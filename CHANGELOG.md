@@ -28,3 +28,6 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added Android debug build verification to the Flutter app CI workflow.
 - Documented the platform microphone permission boundary for fixture mode.
 - Added provider capability metadata for future live adapter declarations.
+- Added provider adapter catalog lookup and capability filtering.
+- Made provider metadata validate identifiers and defensively copy capabilities.
+- Added injectable caption services to the Flutter fixture page for future provider wiring.
