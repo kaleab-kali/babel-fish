@@ -33,3 +33,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added injectable caption services to the Flutter fixture page for future provider wiring.
 - Added speech session lifecycle helpers for immutable status updates.
 - Added visible speech session status to the Flutter fixture page.
+- Added session duration to completed and failed Flutter fixture sessions.

@@ -22,7 +22,7 @@ void main() {
     await tester.tap(find.byIcon(Icons.mic));
     await tester.pumpAndSettle();
 
-    expect(find.text('Session completed'), findsOneWidget);
+    expect(find.textContaining('Session completed'), findsOneWidget);
     expect(find.text('Hello, welcome to Babel Fish.'), findsWidgets);
     expect(find.text('ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።'), findsWidgets);
     await tester.scrollUntilVisible(find.textContaining('Perceived'), 300);
@@ -176,7 +176,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('translation unavailable'), findsOneWidget);
-    expect(find.text('Session failed'), findsOneWidget);
+    expect(find.textContaining('Session failed'), findsOneWidget);
     expect(find.text('No translated caption yet.'), findsOneWidget);
   });
 }
