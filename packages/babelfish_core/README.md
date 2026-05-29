@@ -30,4 +30,7 @@ final session = SpeechSession(
 );
 
 const captureConfig = AudioCaptureConfig();
+final listeningSession = session.copyWith(
+  status: SpeechSessionStatus.listening,
+);
 ```
