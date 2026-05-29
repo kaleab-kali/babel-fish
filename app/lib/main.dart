@@ -44,6 +44,7 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
   late BabelLanguage _sourceLanguage;
   late BabelLanguage _targetLanguage;
   final List<TranslationResult> _history = [];
+  SpeechSession? _session;
   TranscriptSegment? _sourceSegment;
   TranslationResult? _translation;
   LatencyMeasurement? _latency;
@@ -108,6 +109,7 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
     _translation = null;
     _latency = null;
     _error = null;
+    _session = null;
   }
 
   void _clearHistory() {
@@ -139,12 +141,6 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
 
   Future<void> _playFixture() async {
     final captureStartedAt = DateTime.now().toUtc();
-    setState(() {
-      _isPlaying = true;
-      _clearCaptionState();
-      _latency = LatencyMeasurement(captureStartedAt: captureStartedAt);
-    });
-
     final session = SpeechSession(
       id: 'fixture-session',
       sourceLanguage: _sourceLanguage,
@@ -153,14 +149,44 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
       status: SpeechSessionStatus.listening,
     );
 
+    setState(() {
+      _isPlaying = true;
+      _clearCaptionState();
+      _session = session;
+      _latency = LatencyMeasurement(captureStartedAt: captureStartedAt);
+    });
+
     try {
+      final transcribingSession = session.copyWith(
+        status: SpeechSessionStatus.transcribing,
+      );
+
+      setState(() {
+        _session = transcribingSession;
+      });
+
       final sourceSegment = await widget.transcriptionService
           .transcribe(
-            session: session,
-            audioBytes: widget.audioCaptureService.capture(session: session),
+            session: transcribingSession,
+            audioBytes: widget.audioCaptureService.capture(
+              session: transcribingSession,
+            ),
           )
           .first;
       final transcriptAvailableAt = DateTime.now().toUtc();
+
+      if (!mounted) {
+        return;
+      }
+
+      final translatingSession = transcribingSession.copyWith(
+        status: SpeechSessionStatus.translating,
+      );
+
+      setState(() {
+        _sourceSegment = sourceSegment;
+        _session = translatingSession;
+      });
 
       final translation = await widget.translationService.translate(
         segment: sourceSegment,
@@ -173,9 +199,12 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
       }
 
       setState(() {
-        _sourceSegment = sourceSegment;
         _translation = translation;
         _history.insert(0, translation);
+        _session = translatingSession.copyWith(
+          endedAt: translationAvailableAt,
+          status: SpeechSessionStatus.completed,
+        );
         _latency = LatencyMeasurement(
           captureStartedAt: captureStartedAt,
           transcriptAvailableAt: transcriptAvailableAt,
@@ -191,6 +220,10 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
 
       setState(() {
         _error = error.toString();
+        _session = (_session ?? session).copyWith(
+          endedAt: DateTime.now().toUtc(),
+          status: SpeechSessionStatus.failed,
+        );
         _isPlaying = false;
       });
     }
@@ -225,6 +258,8 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
               icon: Icon(_isPlaying ? Icons.graphic_eq : Icons.mic),
               label: Text(_isPlaying ? 'Listening' : 'Play fixture'),
             ),
+            const SizedBox(height: 12),
+            _SessionStatusChip(session: _session),
             const SizedBox(height: 20),
             _CaptionPanel(
               label: 'Source',
@@ -306,6 +341,50 @@ class _FixtureModeBanner extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _SessionStatusChip extends StatelessWidget {
+  const _SessionStatusChip({required this.session});
+
+  final SpeechSession? session;
+
+  @override
+  Widget build(BuildContext context) {
+    final status = session?.status ?? SpeechSessionStatus.idle;
+
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Chip(
+        key: const Key('session-status-chip'),
+        avatar: Icon(_iconFor(status), size: 18),
+        label: Text(_labelFor(status)),
+      ),
+    );
+  }
+
+  IconData _iconFor(SpeechSessionStatus status) {
+    return switch (status) {
+      SpeechSessionStatus.idle => Icons.radio_button_unchecked,
+      SpeechSessionStatus.listening => Icons.mic,
+      SpeechSessionStatus.transcribing => Icons.hearing,
+      SpeechSessionStatus.translating => Icons.translate,
+      SpeechSessionStatus.paused => Icons.pause,
+      SpeechSessionStatus.completed => Icons.check_circle,
+      SpeechSessionStatus.failed => Icons.error,
+    };
+  }
+
+  String _labelFor(SpeechSessionStatus status) {
+    return switch (status) {
+      SpeechSessionStatus.idle => 'Session idle',
+      SpeechSessionStatus.listening => 'Session listening',
+      SpeechSessionStatus.transcribing => 'Session transcribing',
+      SpeechSessionStatus.translating => 'Session translating',
+      SpeechSessionStatus.paused => 'Session paused',
+      SpeechSessionStatus.completed => 'Session completed',
+      SpeechSessionStatus.failed => 'Session failed',
+    };
   }
 }
 
