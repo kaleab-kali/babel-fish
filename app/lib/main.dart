@@ -25,20 +25,22 @@ class BabelFishApp extends StatelessWidget {
 }
 
 class FixtureCaptionPage extends StatefulWidget {
-  const FixtureCaptionPage({super.key});
+  const FixtureCaptionPage({
+    super.key,
+    this.transcriptionService = const FixtureTranscriptionService(),
+    this.translationService = const FixtureTranslationService(),
+    this.audioCaptureService = const FixtureAudioCaptureService(),
+  });
+
+  final TranscriptionService transcriptionService;
+  final TranslationService translationService;
+  final AudioCaptureService audioCaptureService;
 
   @override
   State<FixtureCaptionPage> createState() => _FixtureCaptionPageState();
 }
 
 class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
-  final TranscriptionService _transcriptionService =
-      const FixtureTranscriptionService();
-  final TranslationService _translationService =
-      const FixtureTranslationService();
-  final AudioCaptureService _audioCaptureService =
-      const FixtureAudioCaptureService();
-
   late BabelLanguage _sourceLanguage;
   late BabelLanguage _targetLanguage;
   final List<TranslationResult> _history = [];
@@ -152,15 +154,15 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
     );
 
     try {
-      final sourceSegment = await _transcriptionService
+      final sourceSegment = await widget.transcriptionService
           .transcribe(
             session: session,
-            audioBytes: _audioCaptureService.capture(session: session),
+            audioBytes: widget.audioCaptureService.capture(session: session),
           )
           .first;
       final transcriptAvailableAt = DateTime.now().toUtc();
 
-      final translation = await _translationService.translate(
+      final translation = await widget.translationService.translate(
         segment: sourceSegment,
         targetLanguage: _targetLanguage,
       );

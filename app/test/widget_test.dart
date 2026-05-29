@@ -1,4 +1,5 @@
 import 'package:babel_fish_app/main.dart';
+import 'package:babelfish_core/babelfish_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -145,4 +146,38 @@ void main() {
     expect(find.byKey(const Key('caption-history-list')), findsNothing);
     expect(find.text('Hello, welcome to Babel Fish.'), findsOneWidget);
   });
+
+  testWidgets('surfaces injected translation service errors', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: FixtureCaptionPage(
+          translationService: _FailingTranslationService(),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(
+      find.textContaining('translation unavailable'),
+      300,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('translation unavailable'), findsOneWidget);
+    expect(find.text('No translated caption yet.'), findsOneWidget);
+  });
+}
+
+final class _FailingTranslationService implements TranslationService {
+  const _FailingTranslationService();
+
+  @override
+  Future<TranslationResult> translate({
+    required TranscriptSegment segment,
+    required BabelLanguage targetLanguage,
+  }) async {
+    throw StateError('translation unavailable');
+  }
 }
