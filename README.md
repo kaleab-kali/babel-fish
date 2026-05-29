@@ -103,7 +103,7 @@ Babel Fish is designed to make data behavior visible.
 
 Fixture mode uses local demo text only. It should not send network requests, require microphone access, or store real user audio.
 
-Recording mode and live provider mode will document what is captured, where temporary files are stored, what is sent to third-party services, and how users can disable or clear local data.
+Recording mode and live provider mode will document what is captured, where temporary files are stored, what is sent to third-party services, and how users can disable or clear local data. Platform microphone permissions should not be added until recording mode is introduced in a reviewed change.
 
 ## Contributing
 
