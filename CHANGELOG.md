@@ -23,3 +23,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Regenerated the Flutter app scaffold with standard Android, iOS, Linux, macOS, web, and Windows platform folders.
 - Added a clear action for the Flutter demo app's in-session caption history.
 - Added platform-neutral audio capture contracts to `babelfish_core`.
+- Added deterministic fixture audio capture service and wired the Flutter demo to use it.

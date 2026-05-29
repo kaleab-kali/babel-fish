@@ -36,6 +36,8 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
       const FixtureTranscriptionService();
   final TranslationService _translationService =
       const FixtureTranslationService();
+  final AudioCaptureService _audioCaptureService =
+      const FixtureAudioCaptureService();
 
   late BabelLanguage _sourceLanguage;
   late BabelLanguage _targetLanguage;
@@ -151,7 +153,10 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
 
     try {
       final sourceSegment = await _transcriptionService
-          .transcribe(session: session, audioBytes: Stream<List<int>>.empty())
+          .transcribe(
+            session: session,
+            audioBytes: _audioCaptureService.capture(session: session),
+          )
           .first;
       final transcriptAvailableAt = DateTime.now().toUtc();
 

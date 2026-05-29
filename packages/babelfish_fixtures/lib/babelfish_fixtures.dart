@@ -1,3 +1,4 @@
+export 'src/fixture_audio_capture_service.dart';
 export 'src/fixture_languages.dart';
 export 'src/fixture_transcription_service.dart';
 export 'src/fixture_transcripts.dart';
