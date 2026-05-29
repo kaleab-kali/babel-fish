@@ -44,6 +44,9 @@ jobs:
         working-directory: app
         run: dart format --set-exit-if-changed .
 
+      - name: Verify fixture mode permissions
+        run: dart tool/verify_fixture_permissions.dart
+
       - name: Analyze app
         working-directory: app
         run: dart analyze
