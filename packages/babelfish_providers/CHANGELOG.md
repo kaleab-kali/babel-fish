@@ -6,3 +6,4 @@
 - Added unavailable audio capture service implementation.
 - Added provider capability metadata for adapter declarations.
 - Added provider adapter catalog lookup and capability filtering.
+- Made provider metadata validate required identifiers and copy capability sets defensively.

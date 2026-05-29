@@ -3,7 +3,7 @@ import 'package:babelfish_providers/babelfish_providers.dart';
 import 'package:test/test.dart';
 
 void main() {
-  const provider = ProviderAdapterInfo(
+  final provider = ProviderAdapterInfo(
     id: 'live-demo',
     name: 'Live Demo',
     requiresNetwork: true,
@@ -20,7 +20,7 @@ void main() {
 
   group('UnavailableAudioCaptureService', () {
     test('throws an explicit provider exception', () {
-      const service = UnavailableAudioCaptureService(provider: provider);
+      final service = UnavailableAudioCaptureService(provider: provider);
       final session = SpeechSession(
         id: 'session',
         sourceLanguage: english,
@@ -40,7 +40,7 @@ void main() {
 
   group('UnavailableTranscriptionService', () {
     test('throws an explicit provider exception', () {
-      const service = UnavailableTranscriptionService(provider: provider);
+      final service = UnavailableTranscriptionService(provider: provider);
       final session = SpeechSession(
         id: 'session',
         sourceLanguage: english,
@@ -60,7 +60,7 @@ void main() {
 
   group('UnavailableTranslationService', () {
     test('throws an explicit provider exception', () {
-      const service = UnavailableTranslationService(provider: provider);
+      final service = UnavailableTranslationService(provider: provider);
       const segment = TranscriptSegment(
         id: 'segment',
         language: english,
