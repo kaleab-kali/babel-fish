@@ -6,6 +6,8 @@ The app currently supports fixture-backed language pair selection for English, F
 
 The app includes standard Flutter platform scaffolds for Android, iOS, Linux, macOS, web, and Windows. Flutter Web is the current runnable demo target; mobile and desktop folders are checked in early so microphone and speech-provider work can be added against a normal app scaffold.
 
+Fixture mode should not request microphone permissions on any platform. Add platform microphone permissions only in the same reviewed change that introduces recording mode and documents the privacy behavior.
+
 ## Run
 
 ```sh
