@@ -27,6 +27,25 @@ final class SpeechSession {
   final DateTime? endedAt;
   final SpeechSessionStatus status;
 
+  SpeechSession copyWith({
+    String? id,
+    BabelLanguage? sourceLanguage,
+    BabelLanguage? targetLanguage,
+    DateTime? startedAt,
+    DateTime? endedAt,
+    bool clearEndedAt = false,
+    SpeechSessionStatus? status,
+  }) {
+    return SpeechSession(
+      id: id ?? this.id,
+      sourceLanguage: sourceLanguage ?? this.sourceLanguage,
+      targetLanguage: targetLanguage ?? this.targetLanguage,
+      startedAt: startedAt ?? this.startedAt,
+      endedAt: clearEndedAt ? null : endedAt ?? this.endedAt,
+      status: status ?? this.status,
+    );
+  }
+
   bool get isActive {
     return switch (status) {
       SpeechSessionStatus.listening ||
