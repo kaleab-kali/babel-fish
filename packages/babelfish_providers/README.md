@@ -8,6 +8,7 @@ This package is intentionally small for now. It contains scaffolding for live au
 
 - Provider adapter metadata.
 - Provider capability metadata for audio capture, transcription, and translation.
+- Provider adapter catalog lookup and capability filtering.
 - Explicit unavailable audio capture, transcription, and translation service implementations.
 - Provider exceptions that callers can surface as clear app states.
 
