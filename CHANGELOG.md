@@ -25,3 +25,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added platform-neutral audio capture contracts to `babelfish_core`.
 - Added deterministic fixture audio capture service and wired the Flutter demo to use it.
 - Added unavailable provider audio capture adapter scaffold.
+- Added Android debug build verification to the Flutter app CI workflow.
