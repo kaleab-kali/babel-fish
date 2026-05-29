@@ -7,11 +7,12 @@ This package is intentionally platform-neutral. It does not depend on Flutter, p
 ## Contents
 
 - Language metadata.
+- Audio capture configuration model.
 - Transcript segment model.
 - Translation result model.
 - Speech session model.
 - Latency measurement model.
-- Transcription and translation service contracts.
+- Audio capture, transcription, and translation service contracts.
 
 ## Usage
 
@@ -27,4 +28,6 @@ final session = SpeechSession(
   targetLanguage: french,
   startedAt: DateTime.utc(2026, 1, 1),
 );
+
+const captureConfig = AudioCaptureConfig();
 ```
