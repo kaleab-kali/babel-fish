@@ -8,6 +8,11 @@ void main() {
     name: 'Live Demo',
     requiresNetwork: true,
     requiresCredentials: true,
+    capabilities: <ProviderCapability>{
+      ProviderCapability.audioCapture,
+      ProviderCapability.transcription,
+      ProviderCapability.translation,
+    },
   );
 
   const english = BabelLanguage(code: 'en', name: 'English');

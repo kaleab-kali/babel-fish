@@ -4,3 +4,4 @@
 
 - Initial provider package scaffold with unavailable adapter implementations.
 - Added unavailable audio capture service implementation.
+- Added provider capability metadata for adapter declarations.
