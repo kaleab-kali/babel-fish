@@ -35,6 +35,7 @@ Pull requests run the same Dart workspace checks in GitHub Actions.
 For Flutter app work, run:
 
 ```sh
+dart tool/verify_fixture_permissions.dart
 cd app
 flutter pub get
 dart analyze
@@ -44,6 +45,8 @@ flutter build apk --debug
 ```
 
 Flutter app changes also run app-specific GitHub Actions checks. The repository keeps generated Flutter platform scaffolds checked in; use Flutter tooling to repair or update those folders instead of hand-writing platform boilerplate.
+
+The fixture permission verifier must keep passing until recording mode is introduced with reviewed platform permission and privacy documentation updates.
 
 ## Pull request checklist
 
