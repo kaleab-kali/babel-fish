@@ -358,7 +358,7 @@ class _SessionStatusChip extends StatelessWidget {
       child: Chip(
         key: const Key('session-status-chip'),
         avatar: Icon(_iconFor(status), size: 18),
-        label: Text(_labelFor(status)),
+        label: Text(_labelFor(status, session?.duration)),
       ),
     );
   }
@@ -375,8 +375,8 @@ class _SessionStatusChip extends StatelessWidget {
     };
   }
 
-  String _labelFor(SpeechSessionStatus status) {
-    return switch (status) {
+  String _labelFor(SpeechSessionStatus status, Duration? duration) {
+    final label = switch (status) {
       SpeechSessionStatus.idle => 'Session idle',
       SpeechSessionStatus.listening => 'Session listening',
       SpeechSessionStatus.transcribing => 'Session transcribing',
@@ -385,6 +385,12 @@ class _SessionStatusChip extends StatelessWidget {
       SpeechSessionStatus.completed => 'Session completed',
       SpeechSessionStatus.failed => 'Session failed',
     };
+
+    if (duration == null) {
+      return label;
+    }
+
+    return '$label (${duration.inMilliseconds} ms)';
   }
 }
 
