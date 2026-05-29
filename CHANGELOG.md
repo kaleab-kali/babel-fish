@@ -35,3 +35,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added visible speech session status to the Flutter fixture page.
 - Added session duration to completed and failed Flutter fixture sessions.
 - Added CI verification that fixture mode does not request platform microphone permissions.
+- Added fixture transcript cycling for repeated Flutter demo runs.
