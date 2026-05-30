@@ -118,6 +118,12 @@ Do not commit provider keys, real user recordings, private transcripts, or local
 
 See [SECURITY.md](SECURITY.md) for vulnerability reporting and secret-handling guidance.
 
+## Deployment
+
+The Flutter web fixture demo can be deployed to GitHub Pages with the `Deploy Web` workflow after repository Pages settings are configured to use GitHub Actions.
+
+See [docs/deployment.md](docs/deployment.md) for deployment details and pre-deploy checks.
+
 ## License
 
 Babel Fish is available under the [MIT License](LICENSE).
