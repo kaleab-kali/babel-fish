@@ -120,7 +120,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting and secret-handling g
 
 ## Deployment
 
-The Flutter web fixture demo can be deployed to GitHub Pages with the `Deploy Web` workflow after repository Pages settings are configured to use GitHub Actions.
+The Flutter web fixture demo can be deployed to GitHub Pages with the `Deploy Web` workflow after repository Pages settings are configured to use GitHub Actions and the `BABEL_FISH_PAGES_DEPLOY` repository variable is set to `true`.
 
 See [docs/deployment.md](docs/deployment.md) for deployment details and pre-deploy checks.
 
