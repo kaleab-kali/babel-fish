@@ -24,6 +24,7 @@ For current Dart package work, run:
 
 ```sh
 dart format --set-exit-if-changed .
+dart tool/verify_no_secrets.dart
 dart analyze
 dart test packages/babelfish_core
 dart test packages/babelfish_fixtures
@@ -54,4 +55,5 @@ The fixture permission verifier must keep passing until recording mode is introd
 - Public APIs are documented.
 - User-facing behavior is covered by tests or clear manual verification.
 - README or docs are updated when setup, behavior, privacy, or limitations change.
+- `dart tool/verify_no_secrets.dart` passes.
 - The branch contains no generated files, local recordings, credentials, or provider keys.
