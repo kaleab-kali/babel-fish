@@ -39,3 +39,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added a GitHub Pages deployment workflow for the Flutter web fixture demo.
 - Gated GitHub Pages deployment behind an explicit repository variable.
 - Added CI verification for committed secrets, recordings, and private transcript artifacts.
+- Added workflow concurrency, job timeouts, and current checkout actions for CI reliability.
