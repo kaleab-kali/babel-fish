@@ -38,3 +38,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added fixture transcript cycling for repeated Flutter demo runs.
 - Added a GitHub Pages deployment workflow for the Flutter web fixture demo.
 - Gated GitHub Pages deployment behind an explicit repository variable.
+- Added CI verification for committed secrets, recordings, and private transcript artifacts.

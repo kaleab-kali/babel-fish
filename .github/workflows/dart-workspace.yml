@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
+      - name: Verify no secrets or recording artifacts
+        run: dart tool/verify_no_secrets.dart
+
       - name: Check formatting
         run: dart format --set-exit-if-changed .
 
