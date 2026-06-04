@@ -320,6 +320,78 @@ void main() {
     expect(find.textContaining('Session failed'), findsOneWidget);
     expect(find.text('No translated caption yet.'), findsOneWidget);
   });
+
+  testWidgets('surfaces injected transcription service errors', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: FixtureCaptionPage(
+          transcriptionService: _FailingTranscriptionService(),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(
+      find.textContaining('transcription unavailable'),
+      300,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('transcription unavailable'), findsOneWidget);
+    expect(find.textContaining('Session failed'), findsOneWidget);
+    expect(find.text('No source caption yet.'), findsOneWidget);
+    expect(find.text('No translated caption yet.'), findsOneWidget);
+  });
+
+  testWidgets('surfaces injected audio capture service errors', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: FixtureCaptionPage(
+          audioCaptureService: _FailingAudioCaptureService(),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(
+      find.textContaining('audio capture unavailable'),
+      300,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('audio capture unavailable'), findsOneWidget);
+    expect(find.textContaining('Session failed'), findsOneWidget);
+    expect(find.text('No source caption yet.'), findsOneWidget);
+    expect(find.text('No translated caption yet.'), findsOneWidget);
+  });
+}
+
+final class _FailingAudioCaptureService implements AudioCaptureService {
+  const _FailingAudioCaptureService();
+
+  @override
+  Stream<List<int>> capture({
+    required SpeechSession session,
+    AudioCaptureConfig config = const AudioCaptureConfig(),
+  }) {
+    return Stream.error(StateError('audio capture unavailable'));
+  }
+}
+
+final class _FailingTranscriptionService implements TranscriptionService {
+  const _FailingTranscriptionService();
+
+  @override
+  Stream<TranscriptSegment> transcribe({
+    required SpeechSession session,
+    required Stream<List<int>> audioBytes,
+  }) async* {
+    throw StateError('transcription unavailable');
+  }
 }
 
 final class _FailingTranslationService implements TranslationService {
