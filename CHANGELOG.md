@@ -43,3 +43,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Restored proper Amharic and French fixture text for the multilingual demo.
 - Added explicit screen-reader semantics for fixture status, captions, and latency readouts.
 - Added CI verification for the Flutter web build size budget.
+- Updated web workflow path filters to run when the build budget verifier changes.
