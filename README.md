@@ -26,7 +26,7 @@ The first supported mode will be fixture mode:
 - No real user audio required.
 - Predictable transcript and translation data for demos and tests.
 
-The Flutter app has a standard multi-platform scaffold and a web-runnable fixture flow. The current demo supports language-pair selection, repeatable transcript cycling, translated-caption copy, clearable in-session history, visible session status, session duration, and latency chips. Live provider mode and on-device model support are planned after the fixture app path is stable.
+The Flutter app has a standard multi-platform scaffold and a web-runnable fixture flow. The current demo supports language-pair selection, supported-pair swapping, repeatable transcript cycling, translated-caption copy, clearable in-session history, visible session status, session duration, and latency chips. Live provider mode and on-device model support are planned after the fixture app path is stable.
 
 ## Planned Features
 
