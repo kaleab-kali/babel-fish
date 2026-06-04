@@ -64,6 +64,9 @@ jobs:
         working-directory: app
         run: flutter build web
 
+      - name: Verify web build size budget
+        run: dart tool/verify_web_build_budget.dart
+
       - name: Build Android debug app
         working-directory: app
         run: flutter build apk --debug

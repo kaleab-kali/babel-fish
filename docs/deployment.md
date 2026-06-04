@@ -22,6 +22,11 @@ dart format --set-exit-if-changed .
 dart analyze
 flutter test
 flutter build web --base-href "/babel-fish/"
+dart tool/verify_web_build_budget.dart
 ```
+
+The web build budget currently limits `main.dart.js` to 3.0 MiB and the full
+`app/build/web` artifact to 45.0 MiB. Raise those limits only with a clear
+reason in the pull request.
 
 Fixture mode must remain deployable without network calls from the app, provider credentials, microphone permissions, real recordings, or private transcripts.
