@@ -24,7 +24,7 @@ const fixtureTranslations = [
     sourceLanguage: FixtureLanguages.english,
     targetLanguage: FixtureLanguages.french,
     sourceText: 'This offline demo keeps captions predictable.',
-    translatedText: 'Cette demo hors ligne garde les sous-titres previsibles.',
+    translatedText: 'Cette démo hors ligne garde les sous-titres prévisibles.',
   ),
   FixtureTranslation(
     sourceLanguage: FixtureLanguages.amharic,

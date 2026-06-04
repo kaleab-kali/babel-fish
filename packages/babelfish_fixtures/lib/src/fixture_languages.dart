@@ -6,7 +6,7 @@ abstract final class FixtureLanguages {
   static const french = BabelLanguage(
     code: 'fr',
     name: 'French',
-    nativeName: 'Francais',
+    nativeName: 'Français',
   );
 
   static const amharic = BabelLanguage(
