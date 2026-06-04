@@ -105,6 +105,23 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
     });
   }
 
+  bool get _canSwapLanguages {
+    return _targetLanguagesFor(_targetLanguage).contains(_sourceLanguage);
+  }
+
+  void _swapLanguages() {
+    if (!_canSwapLanguages) {
+      return;
+    }
+
+    setState(() {
+      final previousSourceLanguage = _sourceLanguage;
+      _sourceLanguage = _targetLanguage;
+      _targetLanguage = previousSourceLanguage;
+      _clearCaptionState();
+    });
+  }
+
   void _clearCaptionState() {
     _sourceSegment = null;
     _translation = null;
@@ -265,6 +282,7 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
               targetLanguages: _targetLanguageOptions,
               onSourceChanged: _isPlaying ? null : _selectSourceLanguage,
               onTargetChanged: _isPlaying ? null : _selectTargetLanguage,
+              onSwap: _isPlaying || !_canSwapLanguages ? null : _swapLanguages,
             ),
             const SizedBox(height: 20),
             FilledButton.icon(
@@ -432,6 +450,7 @@ class _LanguageSelector extends StatelessWidget {
     required this.targetLanguages,
     required this.onSourceChanged,
     required this.onTargetChanged,
+    required this.onSwap,
   });
 
   final BabelLanguage sourceLanguage;
@@ -440,6 +459,7 @@ class _LanguageSelector extends StatelessWidget {
   final List<BabelLanguage> targetLanguages;
   final ValueChanged<BabelLanguage?>? onSourceChanged;
   final ValueChanged<BabelLanguage?>? onTargetChanged;
+  final VoidCallback? onSwap;
 
   @override
   Widget build(BuildContext context) {
@@ -464,9 +484,12 @@ class _LanguageSelector extends StatelessWidget {
           return Column(
             children: [
               sourceDropdown,
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(vertical: 8),
-                child: Icon(Icons.arrow_downward),
+                child: _SwapLanguagesButton(
+                  icon: Icons.swap_vert,
+                  onPressed: onSwap,
+                ),
               ),
               targetDropdown,
             ],
@@ -476,14 +499,34 @@ class _LanguageSelector extends StatelessWidget {
         return Row(
           children: [
             Expanded(child: sourceDropdown),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Icon(Icons.arrow_forward),
+              child: _SwapLanguagesButton(
+                icon: Icons.swap_horiz,
+                onPressed: onSwap,
+              ),
             ),
             Expanded(child: targetDropdown),
           ],
         );
       },
+    );
+  }
+}
+
+class _SwapLanguagesButton extends StatelessWidget {
+  const _SwapLanguagesButton({required this.icon, required this.onPressed});
+
+  final IconData icon;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton.filledTonal(
+      key: const Key('swap-languages-button'),
+      tooltip: 'Swap languages',
+      onPressed: onPressed,
+      icon: Icon(icon),
     );
   }
 }

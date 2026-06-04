@@ -1,5 +1,6 @@
 import 'package:babel_fish_app/main.dart';
 import 'package:babelfish_core/babelfish_core.dart';
+import 'package:babelfish_fixtures/babelfish_fixtures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -59,6 +60,40 @@ void main() {
 
     expect(find.text('ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።'), findsWidgets);
     expect(find.text('Hello, welcome to Babel Fish.'), findsWidgets);
+  });
+
+  testWidgets('swaps a supported fixture language pair', (tester) async {
+    await tester.pumpWidget(const BabelFishApp());
+
+    await tester.tap(find.byKey(const Key('swap-languages-button')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+
+    final reverseTranslation = fixtureTranslations.singleWhere(
+      (translation) =>
+          translation.sourceLanguage == FixtureLanguages.amharic &&
+          translation.targetLanguage == FixtureLanguages.english,
+    );
+    expect(find.text(reverseTranslation.sourceText), findsWidgets);
+    expect(find.text(reverseTranslation.translatedText), findsWidgets);
+  });
+
+  testWidgets('disables swap when the reverse fixture pair is unavailable', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const BabelFishApp());
+
+    await tester.tap(find.byKey(const Key('target-language-dropdown')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(FixtureLanguages.french.displayName).last);
+    await tester.pumpAndSettle();
+
+    final swapButton = tester.widget<IconButton>(
+      find.byKey(const Key('swap-languages-button')),
+    );
+    expect(swapButton.onPressed, isNull);
   });
 
   testWidgets('advances through fixture transcript segments', (tester) async {
