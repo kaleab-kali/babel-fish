@@ -39,10 +39,13 @@ For Flutter app work, run:
 dart tool/verify_fixture_permissions.dart
 cd app
 flutter pub get
+dart format --set-exit-if-changed .
 dart analyze
 flutter test
 flutter build web
 flutter build apk --debug
+cd ..
+dart tool/verify_web_build_budget.dart
 ```
 
 Flutter app changes also run app-specific GitHub Actions checks. The repository keeps generated Flutter platform scaffolds checked in; use Flutter tooling to repair or update those folders instead of hand-writing platform boilerplate.
@@ -56,4 +59,5 @@ The fixture permission verifier must keep passing until recording mode is introd
 - User-facing behavior is covered by tests or clear manual verification.
 - README or docs are updated when setup, behavior, privacy, or limitations change.
 - `dart tool/verify_no_secrets.dart` passes.
+- `dart tool/verify_web_build_budget.dart` passes after Flutter web builds.
 - The branch contains no generated files, local recordings, credentials, or provider keys.
