@@ -318,40 +318,48 @@ class _FixtureModeBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    const statusText =
+        'Offline demo data only. No microphone, network, or API keys.';
 
-    return DecoratedBox(
-      key: const Key('fixture-mode-banner'),
-      decoration: BoxDecoration(
-        color: colorScheme.tertiaryContainer,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Row(
-          children: [
-            Icon(Icons.cloud_off, color: colorScheme.onTertiaryContainer),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Fixture mode',
-                    style: textTheme.titleSmall?.copyWith(
-                      color: colorScheme.onTertiaryContainer,
+    return Semantics(
+      container: true,
+      excludeSemantics: true,
+      label: 'Fixture mode status',
+      value: statusText,
+      child: DecoratedBox(
+        key: const Key('fixture-mode-banner'),
+        decoration: BoxDecoration(
+          color: colorScheme.tertiaryContainer,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            children: [
+              Icon(Icons.cloud_off, color: colorScheme.onTertiaryContainer),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Fixture mode',
+                      style: textTheme.titleSmall?.copyWith(
+                        color: colorScheme.onTertiaryContainer,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    'Offline demo data only. No microphone, network, or API keys.',
-                    style: textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onTertiaryContainer,
+                    const SizedBox(height: 2),
+                    Text(
+                      statusText,
+                      style: textTheme.bodySmall?.copyWith(
+                        color: colorScheme.onTertiaryContainer,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -366,13 +374,21 @@ class _SessionStatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final status = session?.status ?? SpeechSessionStatus.idle;
+    final statusLabel = _labelFor(status, session?.duration);
 
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Chip(
-        key: const Key('session-status-chip'),
-        avatar: Icon(_iconFor(status), size: 18),
-        label: Text(_labelFor(status, session?.duration)),
+    return Semantics(
+      key: const Key('session-status-semantics'),
+      container: true,
+      excludeSemantics: true,
+      label: 'Speech session status',
+      value: statusLabel,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Chip(
+          key: const Key('session-status-chip'),
+          avatar: Icon(_iconFor(status), size: 18),
+          label: Text(statusLabel),
+        ),
       ),
     );
   }
@@ -511,20 +527,27 @@ class _CaptionPanel extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.all(color: colorScheme.outlineVariant),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(label, style: textTheme.labelLarge),
-            const SizedBox(height: 8),
-            Text(text, style: textTheme.titleLarge),
-          ],
+    return Semantics(
+      key: Key('${label.toLowerCase()}-caption-semantics'),
+      container: true,
+      excludeSemantics: true,
+      label: '$label caption',
+      value: text,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: colorScheme.outlineVariant),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(label, style: textTheme.labelLarge),
+              const SizedBox(height: 8),
+              Text(text, style: textTheme.titleLarge),
+            ],
+          ),
         ),
       ),
     );
@@ -581,9 +604,16 @@ class _LatencyChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
-      avatar: const Icon(Icons.speed, size: 18),
-      label: Text('$label $value'),
+    return Semantics(
+      key: Key('${label.toLowerCase()}-latency-semantics'),
+      container: true,
+      excludeSemantics: true,
+      label: '$label latency',
+      value: value,
+      child: Chip(
+        avatar: const Icon(Icons.speed, size: 18),
+        label: Text('$label $value'),
+      ),
     );
   }
 }
