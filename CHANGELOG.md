@@ -54,3 +54,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added CI verification for local Markdown links.
 - Scoped Dependabot pub updates to the Dart workspace root and Flutter app.
 - Added a Flutter fixture control for swapping supported language pairs.
+- Removed the redundant Flutter web viewport meta tag to avoid runtime warnings.
