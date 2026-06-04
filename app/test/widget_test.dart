@@ -183,6 +183,86 @@ void main() {
     expect(find.text('Hello, welcome to Babel Fish.'), findsOneWidget);
   });
 
+  testWidgets('exposes captions and latency with readable semantics', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    try {
+      await tester.pumpWidget(const BabelFishApp());
+
+      expect(
+        tester.getSemantics(find.byKey(const Key('fixture-mode-banner'))),
+        matchesSemantics(
+          label: 'Fixture mode status',
+          value: 'Offline demo data only. No microphone, network, or API keys.',
+          textDirection: TextDirection.ltr,
+        ),
+      );
+      expect(
+        tester.getSemantics(find.byKey(const Key('session-status-semantics'))),
+        matchesSemantics(
+          label: 'Speech session status',
+          value: 'Session idle',
+          textDirection: TextDirection.ltr,
+        ),
+      );
+      expect(
+        tester.getSemantics(find.byKey(const Key('source-caption-semantics'))),
+        matchesSemantics(
+          label: 'Source caption',
+          value: 'No source caption yet.',
+          textDirection: TextDirection.ltr,
+        ),
+      );
+      expect(
+        tester.getSemantics(
+          find.byKey(const Key('translation-caption-semantics')),
+        ),
+        matchesSemantics(
+          label: 'Translation caption',
+          value: 'No translated caption yet.',
+          textDirection: TextDirection.ltr,
+        ),
+      );
+      await tester.tap(find.byIcon(Icons.mic));
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.getSemantics(find.byKey(const Key('source-caption-semantics'))),
+        matchesSemantics(
+          label: 'Source caption',
+          value: 'Hello, welcome to Babel Fish.',
+          textDirection: TextDirection.ltr,
+        ),
+      );
+      expect(
+        tester.getSemantics(
+          find.byKey(const Key('translation-caption-semantics')),
+        ),
+        matchesSemantics(
+          label: 'Translation caption',
+          value: 'ሰላም፣ ወደ Babel Fish እንኳን በደህና መጡ።',
+          textDirection: TextDirection.ltr,
+        ),
+      );
+
+      await tester.scrollUntilVisible(
+        find.byKey(const Key('perceived-latency-semantics')),
+        300,
+      );
+      await tester.pumpAndSettle();
+
+      final perceivedLatencySemantics = tester
+          .getSemantics(find.byKey(const Key('perceived-latency-semantics')))
+          .getSemanticsData();
+      expect(perceivedLatencySemantics.label, 'Perceived latency');
+      expect(perceivedLatencySemantics.value, endsWith(' ms'));
+      expect(perceivedLatencySemantics.value, isNot('-- ms'));
+    } finally {
+      semantics.dispose();
+    }
+  });
+
   testWidgets('surfaces injected translation service errors', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(

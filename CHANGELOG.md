@@ -41,3 +41,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added CI verification for committed secrets, recordings, and private transcript artifacts.
 - Added workflow concurrency, job timeouts, and current checkout actions for CI reliability.
 - Restored proper Amharic and French fixture text for the multilingual demo.
+- Added explicit screen-reader semantics for fixture status, captions, and latency readouts.
