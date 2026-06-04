@@ -52,3 +52,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Documented release readiness checks and artifact safety guidance.
 - Added Dependabot update checks for GitHub Actions and Dart package manifests.
 - Added CI verification for local Markdown links.
+- Scoped Dependabot pub updates to the Dart workspace root and Flutter app.
