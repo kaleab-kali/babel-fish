@@ -50,3 +50,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Updated local workflow documentation for current security and web budget checks.
 - Tightened contribution templates for privacy-sensitive speech and fixture-mode reports.
 - Documented release readiness checks and artifact safety guidance.
+- Added Dependabot update checks for GitHub Actions and Dart package manifests.
