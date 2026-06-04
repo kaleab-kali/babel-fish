@@ -5,6 +5,7 @@ on:
     paths:
       - app/**
       - packages/**
+      - tool/verify_web_metadata.dart
       - tool/verify_web_build_budget.dart
       - .github/workflows/flutter-app.yml
   push:
@@ -13,6 +14,7 @@ on:
     paths:
       - app/**
       - packages/**
+      - tool/verify_web_metadata.dart
       - tool/verify_web_build_budget.dart
       - .github/workflows/flutter-app.yml
 
@@ -53,6 +55,9 @@ jobs:
 
       - name: Verify fixture mode permissions
         run: dart tool/verify_fixture_permissions.dart
+
+      - name: Verify web metadata
+        run: dart tool/verify_web_metadata.dart
 
       - name: Analyze app
         working-directory: app
