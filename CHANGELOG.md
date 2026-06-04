@@ -45,3 +45,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added CI verification for the Flutter web build size budget.
 - Updated web workflow path filters to run when the build budget verifier changes.
 - Corrected deployment check documentation for the web build budget verifier.
+- Clarified Android application ID and release signing comments in the app scaffold.
