@@ -77,6 +77,7 @@ Run the current checks:
 ```sh
 dart format --set-exit-if-changed .
 dart tool/verify_no_secrets.dart
+dart tool/verify_markdown_links.dart
 dart analyze
 dart test packages/babelfish_core
 dart test packages/babelfish_fixtures

@@ -25,6 +25,7 @@ For current Dart package work, run:
 ```sh
 dart format --set-exit-if-changed .
 dart tool/verify_no_secrets.dart
+dart tool/verify_markdown_links.dart
 dart analyze
 dart test packages/babelfish_core
 dart test packages/babelfish_fixtures
@@ -61,5 +62,6 @@ Maintainer release checks are documented in [docs/release.md](docs/release.md).
 - User-facing behavior is covered by tests or clear manual verification.
 - README or docs are updated when setup, behavior, privacy, or limitations change.
 - `dart tool/verify_no_secrets.dart` passes.
+- `dart tool/verify_markdown_links.dart` passes after documentation changes.
 - `dart tool/verify_web_build_budget.dart` passes after Flutter web builds.
 - The branch contains no generated files, local recordings, credentials, or provider keys.
