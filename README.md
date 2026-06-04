@@ -88,6 +88,7 @@ Run the Flutter fixture demo:
 
 ```sh
 dart tool/verify_fixture_permissions.dart
+dart tool/verify_web_metadata.dart
 cd app
 flutter pub get
 dart analyze

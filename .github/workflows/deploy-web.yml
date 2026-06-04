@@ -6,6 +6,7 @@ on:
       - app/**
       - packages/**
       - tool/verify_fixture_permissions.dart
+      - tool/verify_web_metadata.dart
       - tool/verify_web_build_budget.dart
       - .github/workflows/deploy-web.yml
   push:
@@ -15,6 +16,7 @@ on:
       - app/**
       - packages/**
       - tool/verify_fixture_permissions.dart
+      - tool/verify_web_metadata.dart
       - tool/verify_web_build_budget.dart
       - .github/workflows/deploy-web.yml
   workflow_dispatch:
@@ -50,6 +52,9 @@ jobs:
 
       - name: Verify fixture mode permissions
         run: dart tool/verify_fixture_permissions.dart
+
+      - name: Verify web metadata
+        run: dart tool/verify_web_metadata.dart
 
       - name: Install app dependencies
         working-directory: app
