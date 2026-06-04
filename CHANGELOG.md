@@ -47,3 +47,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Corrected deployment check documentation for the web build budget verifier.
 - Clarified Android application ID and release signing comments in the app scaffold.
 - Aligned Flutter web viewport and PWA theme metadata with the app experience.
+- Updated local workflow documentation for current security and web budget checks.

@@ -12,6 +12,9 @@ Fixture mode should not request microphone permissions on any platform. Add plat
 
 ```sh
 flutter pub get
+dart format --set-exit-if-changed .
+dart analyze
 flutter test
+flutter build web
 flutter run -d chrome
 ```

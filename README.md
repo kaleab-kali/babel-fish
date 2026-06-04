@@ -76,6 +76,7 @@ Run the current checks:
 
 ```sh
 dart format --set-exit-if-changed .
+dart tool/verify_no_secrets.dart
 dart analyze
 dart test packages/babelfish_core
 dart test packages/babelfish_fixtures
@@ -88,6 +89,7 @@ Run the Flutter fixture demo:
 dart tool/verify_fixture_permissions.dart
 cd app
 flutter pub get
+dart analyze
 flutter test
 flutter run -d chrome
 ```
