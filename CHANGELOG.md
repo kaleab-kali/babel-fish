@@ -49,3 +49,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Aligned Flutter web viewport and PWA theme metadata with the app experience.
 - Updated local workflow documentation for current security and web budget checks.
 - Tightened contribution templates for privacy-sensitive speech and fixture-mode reports.
+- Documented release readiness checks and artifact safety guidance.

@@ -126,6 +126,8 @@ The Flutter web fixture demo can be deployed to GitHub Pages with the `Deploy We
 
 See [docs/deployment.md](docs/deployment.md) for deployment details and pre-deploy checks.
 
+For release readiness and tagging guidance, see [docs/release.md](docs/release.md).
+
 ## License
 
 Babel Fish is available under the [MIT License](LICENSE).

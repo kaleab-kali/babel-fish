@@ -52,6 +52,8 @@ Flutter app changes also run app-specific GitHub Actions checks. The repository 
 
 The fixture permission verifier must keep passing until recording mode is introduced with reviewed platform permission and privacy documentation updates.
 
+Maintainer release checks are documented in [docs/release.md](docs/release.md).
+
 ## Pull request checklist
 
 - The change is small enough to review.
