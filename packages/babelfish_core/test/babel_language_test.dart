@@ -13,10 +13,10 @@ void main() {
       const language = BabelLanguage(
         code: 'fr',
         name: 'French',
-        nativeName: 'Francais',
+        nativeName: 'Français',
       );
 
-      expect(language.displayName, 'French (Francais)');
+      expect(language.displayName, 'French (Français)');
     });
 
     test('has value equality', () {

@@ -36,7 +36,7 @@ void main() {
 
     await tester.tap(find.byKey(const Key('target-language-dropdown')));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('French (Francais)').last);
+    await tester.tap(find.text('French (Français)').last);
     await tester.pumpAndSettle();
 
     await tester.tap(find.byIcon(Icons.mic));
@@ -66,7 +66,7 @@ void main() {
 
     await tester.tap(find.byKey(const Key('target-language-dropdown')));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('French (Francais)').last);
+    await tester.tap(find.text('French (Français)').last);
     await tester.pumpAndSettle();
 
     await tester.tap(find.byIcon(Icons.mic));
@@ -79,7 +79,7 @@ void main() {
       findsWidgets,
     );
     expect(
-      find.text('Cette demo hors ligne garde les sous-titres previsibles.'),
+      find.text('Cette démo hors ligne garde les sous-titres prévisibles.'),
       findsWidgets,
     );
   });
@@ -143,7 +143,7 @@ void main() {
 
     await tester.tap(find.byKey(const Key('target-language-dropdown')));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('French (Francais)').last);
+    await tester.tap(find.text('French (Français)').last);
     await tester.pumpAndSettle();
     await tester.tap(find.byIcon(Icons.mic));
     await tester.pumpAndSettle();
@@ -157,7 +157,7 @@ void main() {
     expect(find.byKey(const Key('caption-history-item-0')), findsOneWidget);
     expect(find.byKey(const Key('caption-history-item-1')), findsOneWidget);
     expect(
-      find.text('Cette demo hors ligne garde les sous-titres previsibles.'),
+      find.text('Cette démo hors ligne garde les sous-titres prévisibles.'),
       findsWidgets,
     );
     expect(find.textContaining('English -> French'), findsOneWidget);

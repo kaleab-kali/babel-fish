@@ -20,7 +20,7 @@ This package is intentionally platform-neutral. It does not depend on Flutter, p
 import 'package:babelfish_core/babelfish_core.dart';
 
 const english = BabelLanguage(code: 'en', name: 'English');
-const french = BabelLanguage(code: 'fr', name: 'French', nativeName: 'Francais');
+const french = BabelLanguage(code: 'fr', name: 'French', nativeName: 'Français');
 
 final session = SpeechSession(
   id: 'demo-session',
