@@ -14,6 +14,8 @@ What user problem would this solve?
 
 What should change?
 
+If this affects speech, translation, captioning, or provider integration, note how it should behave in fixture mode without network access or API keys.
+
 ## Acceptance criteria
 
 - [ ]
@@ -22,4 +24,4 @@ What should change?
 
 ## Notes
 
-Relevant links, examples, or constraints.
+Relevant links, examples, privacy constraints, or accessibility requirements.

@@ -10,6 +10,8 @@ assignees: ""
 
 What happened?
 
+Please do not attach real user audio, private transcripts, provider keys, or logs that contain secrets.
+
 ## Expected behavior
 
 What did you expect to happen?
@@ -29,4 +31,4 @@ What did you expect to happen?
 
 ## Additional context
 
-Logs, screenshots, or recordings that help explain the issue.
+Logs, screenshots, or fixture-mode examples that help explain the issue. Redact secrets and private user data before sharing.
