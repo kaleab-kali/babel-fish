@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:babel_fish_app/main.dart';
 import 'package:babelfish_core/babelfish_core.dart';
 import 'package:babelfish_fixtures/babelfish_fixtures.dart';
@@ -114,6 +116,63 @@ void main() {
       find.byKey(const Key('swap-languages-button')),
     );
     expect(swapButton.onPressed, isNull);
+  });
+
+  testWidgets('disables session controls while translation is in progress', (
+    tester,
+  ) async {
+    final translationService = _DeferredTranslationService();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FixtureCaptionPage(translationService: translationService),
+      ),
+    );
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pump();
+
+    expect(find.text('Listening'), findsOneWidget);
+    expect(
+      tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
+      isNull,
+    );
+    expect(
+      tester
+          .widget<DropdownButtonFormField<BabelLanguage>>(
+            _languageDropdownField('source-language-dropdown'),
+          )
+          .onChanged,
+      isNull,
+    );
+    expect(
+      tester
+          .widget<DropdownButtonFormField<BabelLanguage>>(
+            _languageDropdownField('target-language-dropdown'),
+          )
+          .onChanged,
+      isNull,
+    );
+    expect(
+      tester.widget<IconButton>(find.byKey(const Key('swap-languages-button'))),
+      isA<IconButton>().having((button) => button.onPressed, 'onPressed', null),
+    );
+
+    translationService.complete(
+      TranslationResult(
+        sourceSegment: translationService.segment!,
+        targetLanguage: translationService.targetLanguage!,
+        text: 'Deferred translation complete.',
+        completedAt: DateTime.utc(2026, 1, 1, 12),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Play fixture'), findsOneWidget);
+    expect(
+      tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
+      isNotNull,
+    );
+    expect(find.text('Deferred translation complete.'), findsWidgets);
   });
 
   testWidgets('advances through fixture transcript segments', (tester) async {
@@ -401,6 +460,13 @@ void _setTestViewSize(WidgetTester tester, Size size) {
   });
 }
 
+Finder _languageDropdownField(String key) {
+  return find.descendant(
+    of: find.byKey(Key(key)),
+    matching: find.byType(DropdownButtonFormField<BabelLanguage>),
+  );
+}
+
 final class _FailingAudioCaptureService implements AudioCaptureService {
   const _FailingAudioCaptureService();
 
@@ -422,6 +488,26 @@ final class _FailingTranscriptionService implements TranscriptionService {
     required Stream<List<int>> audioBytes,
   }) async* {
     throw StateError('transcription unavailable');
+  }
+}
+
+final class _DeferredTranslationService implements TranslationService {
+  final _completer = Completer<TranslationResult>();
+  TranscriptSegment? segment;
+  BabelLanguage? targetLanguage;
+
+  @override
+  Future<TranslationResult> translate({
+    required TranscriptSegment segment,
+    required BabelLanguage targetLanguage,
+  }) {
+    this.segment = segment;
+    this.targetLanguage = targetLanguage;
+    return _completer.future;
+  }
+
+  void complete(TranslationResult result) {
+    _completer.complete(result);
   }
 }
 
