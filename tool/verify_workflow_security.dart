@@ -120,6 +120,10 @@ void _verifyDeployWorkflow(String contents, List<String> violations) {
     'uses: actions/configure-pages@v6',
     'uses: actions/upload-pages-artifact@v5',
     'uses: actions/deploy-pages@v5',
+    'Smoke test deployed app shell',
+    r'''curl --fail --silent --show-error --location "$PAGE_URL"''',
+    r'''grep --fixed-strings '<title>Babel Fish</title>' <<< "$html"''',
+    r'''grep --fixed-strings 'flutter_bootstrap.js' <<< "$html"''',
   ]) {
     if (!contents.contains(expected)) {
       violations.add('$_deployWorkflowPath: missing deploy guard $expected.');
