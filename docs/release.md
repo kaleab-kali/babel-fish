@@ -8,6 +8,8 @@ work should keep `main` healthy, reproducible, and free of private artifacts.
 Before tagging a release candidate:
 
 - Confirm all GitHub Actions checks on `main` are passing.
+- Review the scheduled `Dart Workspace` and `Flutter App` health checks for
+  toolchain or dependency drift since the last code change.
 - Run the Dart workspace checks from the repository root.
 - Run the Flutter app checks from `app/` when app behavior, generated platform
   scaffolds, or deployment output changed.
