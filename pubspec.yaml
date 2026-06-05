@@ -1,6 +1,8 @@
 name: babel_fish_workspace
 description: Workspace for the Babel Fish Flutter app and Dart packages.
 publish_to: none
+repository: https://github.com/kaleab-kali/babel-fish
+issue_tracker: https://github.com/kaleab-kali/babel-fish/issues
 
 environment:
   sdk: ^3.11.0

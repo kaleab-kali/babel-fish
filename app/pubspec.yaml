@@ -1,6 +1,8 @@
 name: babel_fish_app
 description: Flutter demo app for the Babel Fish fixture caption flow.
 publish_to: none
+repository: https://github.com/kaleab-kali/babel-fish
+issue_tracker: https://github.com/kaleab-kali/babel-fish/issues
 version: 0.1.0+1
 
 environment:
