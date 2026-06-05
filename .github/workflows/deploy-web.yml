@@ -5,6 +5,7 @@ on:
     paths:
       - app/**
       - packages/**
+      - tool/verify_fixture_offline.dart
       - tool/verify_fixture_permissions.dart
       - tool/verify_web_metadata.dart
       - tool/verify_web_build_budget.dart
@@ -15,6 +16,7 @@ on:
     paths:
       - app/**
       - packages/**
+      - tool/verify_fixture_offline.dart
       - tool/verify_fixture_permissions.dart
       - tool/verify_web_metadata.dart
       - tool/verify_web_build_budget.dart
@@ -52,6 +54,9 @@ jobs:
 
       - name: Verify fixture mode permissions
         run: dart tool/verify_fixture_permissions.dart
+
+      - name: Verify fixture offline mode
+        run: dart tool/verify_fixture_offline.dart
 
       - name: Verify web metadata
         run: dart tool/verify_web_metadata.dart

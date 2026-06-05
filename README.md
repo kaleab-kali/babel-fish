@@ -77,6 +77,7 @@ Run the current checks:
 ```sh
 dart format --set-exit-if-changed .
 dart tool/verify_no_secrets.dart
+dart tool/verify_fixture_offline.dart
 dart tool/verify_markdown_links.dart
 dart analyze
 dart test packages/babelfish_core
@@ -88,6 +89,7 @@ Run the Flutter fixture demo:
 
 ```sh
 dart tool/verify_fixture_permissions.dart
+dart tool/verify_fixture_offline.dart
 dart tool/verify_web_metadata.dart
 cd app
 flutter pub get

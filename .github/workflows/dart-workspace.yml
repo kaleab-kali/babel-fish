@@ -37,6 +37,9 @@ jobs:
       - name: Verify no secrets or recording artifacts
         run: dart tool/verify_no_secrets.dart
 
+      - name: Verify fixture offline mode
+        run: dart tool/verify_fixture_offline.dart
+
       - name: Verify Markdown links
         run: dart tool/verify_markdown_links.dart
 

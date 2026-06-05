@@ -57,3 +57,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Removed the redundant Flutter web viewport meta tag to avoid runtime warnings.
 - Added CI verification for Flutter web metadata and manifest assets.
 - Corrected deployment documentation for the web metadata verifier trigger.
+- Added CI verification that fixture app and fixture package code stay offline.
