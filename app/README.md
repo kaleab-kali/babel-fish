@@ -8,6 +8,16 @@ The app includes standard Flutter platform scaffolds for Android, iOS, Linux, ma
 
 Fixture mode should not request microphone permissions on any platform. Add platform microphone permissions only in the same reviewed change that introduces recording mode and documents the privacy behavior.
 
+## Scaffold regeneration
+
+Repair or refresh generated platform files with Flutter tooling instead of hand-writing scaffold boilerplate:
+
+```sh
+flutter create . --project-name babel_fish_app --org dev.babelfish --platforms android,ios,linux,macos,web,windows
+```
+
+After regenerating scaffold files, review the diff carefully and rerun the fixture permission, web metadata, Flutter test, web build, Android debug build, and web build budget checks from the repository docs.
+
 ## Run
 
 ```sh

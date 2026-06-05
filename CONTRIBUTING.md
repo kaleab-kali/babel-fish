@@ -54,7 +54,7 @@ cd ..
 dart tool/verify_web_build_budget.dart
 ```
 
-Flutter app changes also run app-specific GitHub Actions checks. The repository keeps generated Flutter platform scaffolds checked in; use Flutter tooling to repair or update those folders instead of hand-writing platform boilerplate.
+Flutter app changes also run app-specific GitHub Actions checks. The repository keeps generated Flutter platform scaffolds checked in; use Flutter tooling to repair or update those folders instead of hand-writing platform boilerplate. From `app/`, use `flutter create . --project-name babel_fish_app --org dev.babelfish --platforms android,ios,linux,macos,web,windows` when platform scaffolds need to be regenerated, then review the generated diff before committing it.
 
 The fixture permission verifier must keep passing until recording mode is introduced with reviewed platform permission and privacy documentation updates.
 
