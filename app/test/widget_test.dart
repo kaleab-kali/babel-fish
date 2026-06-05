@@ -278,6 +278,27 @@ void main() {
     expect(find.textContaining('English -> Amharic'), findsOneWidget);
   });
 
+  testWidgets('limits completed fixture translation history', (tester) async {
+    await tester.pumpWidget(const BabelFishApp());
+
+    for (var index = 0; index < 12; index += 1) {
+      await tester.tap(find.byIcon(Icons.mic));
+      await tester.pumpAndSettle();
+    }
+
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('caption-history-list')),
+      300,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('caption-history-list')), findsOneWidget);
+    for (var index = 0; index < 10; index += 1) {
+      expect(find.byKey(Key('caption-history-item-$index')), findsOneWidget);
+    }
+    expect(find.byKey(const Key('caption-history-item-10')), findsNothing);
+  });
+
   testWidgets('clears completed fixture translation history', (tester) async {
     await tester.pumpWidget(const BabelFishApp());
 
