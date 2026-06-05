@@ -2,6 +2,11 @@
 
 Babel Fish can deploy the Flutter web fixture demo to GitHub Pages.
 
+## Live demo
+
+The current fixture demo is published at
+[kaleab-kali.github.io/babel-fish](https://kaleab-kali.github.io/babel-fish/).
+
 ## GitHub Pages
 
 The `Deploy Web` workflow builds the Flutter app from `app/`. Pull requests run build validation only. Pushes to `main` that touch the app, packages, the fixture offline verifier, the fixture permission verifier, the web metadata verifier, the web build budget verifier, or the deployment workflow run the build job.
