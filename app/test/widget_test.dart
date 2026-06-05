@@ -400,6 +400,40 @@ void main() {
     expect(find.text('No translated caption yet.'), findsOneWidget);
   });
 
+  testWidgets('clears transient translation errors after a successful retry', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FixtureCaptionPage(
+          translationService: _FailsOnceTranslationService(),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(
+      find.textContaining('temporary translation outage'),
+      300,
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('temporary translation outage'), findsOneWidget);
+    expect(find.textContaining('Session failed'), findsOneWidget);
+
+    await tester.scrollUntilVisible(find.byIcon(Icons.mic), -300);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.mic));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('temporary translation outage'), findsNothing);
+    expect(find.textContaining('Session completed'), findsOneWidget);
+    expect(find.text('No translated caption yet.'), findsNothing);
+  });
+
   testWidgets('surfaces injected transcription service errors', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
@@ -508,6 +542,27 @@ final class _DeferredTranslationService implements TranslationService {
 
   void complete(TranslationResult result) {
     _completer.complete(result);
+  }
+}
+
+final class _FailsOnceTranslationService implements TranslationService {
+  final _delegate = const FixtureTranslationService();
+  var _calls = 0;
+
+  @override
+  Future<TranslationResult> translate({
+    required TranscriptSegment segment,
+    required BabelLanguage targetLanguage,
+  }) {
+    _calls += 1;
+    if (_calls == 1) {
+      throw StateError('temporary translation outage');
+    }
+
+    return _delegate.translate(
+      segment: segment,
+      targetLanguage: targetLanguage,
+    );
   }
 }
 

@@ -66,3 +66,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Clarified GitHub Pages deployment readiness and troubleshooting guidance.
 - Updated Flutter App workflow triggers for fixture permission verifier changes.
 - Added Flutter widget coverage for in-flight session controls.
+- Added Flutter widget coverage for retrying after transient translation errors.
