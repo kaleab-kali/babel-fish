@@ -10,8 +10,8 @@ void main() {
 
     if (_forbiddenArtifactExtensions.contains(extension)) {
       violations.add(
-        '$path: tracked file uses a forbidden real recording or transcript '
-        'artifact extension.',
+        '$path: tracked file uses a forbidden recording, transcript, '
+        'credential, or signing artifact extension.',
       );
       continue;
     }
@@ -85,14 +85,25 @@ String _extensionOf(String path) {
 const _forbiddenArtifactExtensions = {
   '.aac',
   '.ass',
+  '.cer',
+  '.crt',
+  '.der',
   '.flac',
+  '.jks',
+  '.key',
+  '.keystore',
   '.m4a',
   '.mkv',
+  '.mobileprovision',
   '.mov',
   '.mp3',
   '.mp4',
   '.ogg',
   '.opus',
+  '.p12',
+  '.pem',
+  '.pfx',
+  '.provisionprofile',
   '.srt',
   '.transcript',
   '.vtt',
@@ -157,6 +168,10 @@ final _secretPatterns = [
   _SecretPattern(
     name: 'AWS access key id',
     expression: RegExp(r'\bAKIA[0-9A-Z]{16}\b'),
+  ),
+  _SecretPattern(
+    name: 'AWS temporary access key id',
+    expression: RegExp(r'\bASIA[0-9A-Z]{16}\b'),
   ),
   _SecretPattern(
     name: 'Slack token',
