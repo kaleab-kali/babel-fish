@@ -80,6 +80,26 @@ void main() {
     expect(find.text(reverseTranslation.translatedText), findsWidgets);
   });
 
+  testWidgets('stacks language controls on narrow screens', (tester) async {
+    _setTestViewSize(tester, const Size(390, 844));
+
+    await tester.pumpWidget(const BabelFishApp());
+
+    expect(find.byIcon(Icons.swap_vert), findsOneWidget);
+    expect(find.byIcon(Icons.swap_horiz), findsNothing);
+  });
+
+  testWidgets('lays out language controls horizontally on wide screens', (
+    tester,
+  ) async {
+    _setTestViewSize(tester, const Size(900, 700));
+
+    await tester.pumpWidget(const BabelFishApp());
+
+    expect(find.byIcon(Icons.swap_horiz), findsOneWidget);
+    expect(find.byIcon(Icons.swap_vert), findsNothing);
+  });
+
   testWidgets('disables swap when the reverse fixture pair is unavailable', (
     tester,
   ) async {
@@ -367,6 +387,17 @@ void main() {
     expect(find.textContaining('Session failed'), findsOneWidget);
     expect(find.text('No source caption yet.'), findsOneWidget);
     expect(find.text('No translated caption yet.'), findsOneWidget);
+  });
+}
+
+void _setTestViewSize(WidgetTester tester, Size size) {
+  tester.view
+    ..devicePixelRatio = 1
+    ..physicalSize = size;
+  addTearDown(() {
+    tester.view
+      ..resetDevicePixelRatio()
+      ..resetPhysicalSize();
   });
 }
 

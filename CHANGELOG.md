@@ -60,3 +60,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added CI verification that fixture app and fixture package code stay offline.
 - Added CI verification for GitHub Actions workflow security guards.
 - Added repository metadata to workspace and package manifests.
+- Added Flutter widget coverage for responsive language controls.
