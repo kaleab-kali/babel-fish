@@ -8,7 +8,7 @@ Fixture mode uses local demo text only. It does not require network access, micr
 
 The checked-in Flutter platform scaffolds should not request microphone permissions while fixture mode is the only runnable app mode. Android, iOS, macOS, Windows, Linux, and web builds must keep using deterministic fixture capture until recording mode is introduced intentionally.
 
-Run `dart tool/verify_fixture_permissions.dart` from the repository root before pull requests that touch app platform files. The same check runs in the Flutter app GitHub Actions workflow.
+Run `dart tool/verify_fixture_permissions.dart` from the repository root before pull requests that touch app platform files. Run `dart tool/verify_fixture_offline.dart` before pull requests that touch the fixture app or fixture package. The same checks run in GitHub Actions.
 
 ## Recording mode
 

@@ -25,6 +25,7 @@ For current Dart package work, run:
 ```sh
 dart format --set-exit-if-changed .
 dart tool/verify_no_secrets.dart
+dart tool/verify_fixture_offline.dart
 dart tool/verify_markdown_links.dart
 dart analyze
 dart test packages/babelfish_core
@@ -38,6 +39,7 @@ For Flutter app work, run:
 
 ```sh
 dart tool/verify_fixture_permissions.dart
+dart tool/verify_fixture_offline.dart
 dart tool/verify_web_metadata.dart
 cd app
 flutter pub get
@@ -63,6 +65,7 @@ Maintainer release checks are documented in [docs/release.md](docs/release.md).
 - User-facing behavior is covered by tests or clear manual verification.
 - README or docs are updated when setup, behavior, privacy, or limitations change.
 - `dart tool/verify_no_secrets.dart` passes.
+- `dart tool/verify_fixture_offline.dart` passes after fixture app or fixture package changes.
 - `dart tool/verify_markdown_links.dart` passes after documentation changes.
 - `dart tool/verify_web_metadata.dart` passes after Flutter web metadata changes.
 - `dart tool/verify_web_build_budget.dart` passes after Flutter web builds.
