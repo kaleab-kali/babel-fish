@@ -39,45 +39,6 @@ updates:
         patterns:
           - "*"
 
-  - package-ecosystem: "pub"
-    directory: "/packages/babelfish_core"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "Etc/UTC"
-    open-pull-requests-limit: 5
-    groups:
-      core-package:
-        patterns:
-          - "*"
-
-  - package-ecosystem: "pub"
-    directory: "/packages/babelfish_fixtures"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "Etc/UTC"
-    open-pull-requests-limit: 5
-    groups:
-      fixtures-package:
-        patterns:
-          - "*"
-
-  - package-ecosystem: "pub"
-    directory: "/packages/babelfish_providers"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "Etc/UTC"
-    open-pull-requests-limit: 5
-    groups:
-      providers-package:
-        patterns:
-          - "*"
-
   - package-ecosystem: "gradle"
     directory: "/app/android"
     schedule:
