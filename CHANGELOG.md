@@ -59,3 +59,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Corrected deployment documentation for the web metadata verifier trigger.
 - Added CI verification that fixture app and fixture package code stay offline.
 - Added CI verification for GitHub Actions workflow security guards.
+- Added repository metadata to workspace and package manifests.

@@ -2,6 +2,13 @@ name: babelfish_fixtures
 description: Offline demo fixtures and service implementations for Babel Fish.
 version: 0.1.0
 publish_to: none
+repository: https://github.com/kaleab-kali/babel-fish
+issue_tracker: https://github.com/kaleab-kali/babel-fish/issues
+topics:
+  - speech
+  - translation
+  - fixtures
+  - dart
 
 environment:
   sdk: ^3.11.0
