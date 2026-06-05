@@ -41,6 +41,7 @@ For Flutter app work, run:
 
 ```sh
 dart tool/verify_fixture_permissions.dart
+dart tool/verify_app_identity.dart
 dart tool/verify_fixture_offline.dart
 dart tool/verify_web_metadata.dart
 cd app
@@ -70,6 +71,7 @@ Maintainer release checks are documented in [docs/release.md](docs/release.md).
 - `dart tool/verify_workflow_security.dart` passes after GitHub Actions changes.
 - `dart tool/verify_pubspec_metadata.dart` passes after package manifest changes.
 - `dart tool/verify_fixture_offline.dart` passes after fixture app or fixture package changes.
+- `dart tool/verify_app_identity.dart` passes after Flutter platform metadata changes.
 - `dart tool/verify_markdown_links.dart` passes after documentation changes.
 - `dart tool/verify_web_metadata.dart` passes after Flutter web metadata changes.
 - `dart tool/verify_web_build_budget.dart` passes after Flutter web builds.
