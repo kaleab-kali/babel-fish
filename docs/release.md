@@ -11,6 +11,8 @@ Before tagging a release candidate:
 - Run the Dart workspace checks from the repository root.
 - Run the Flutter app checks from `app/` when app behavior, generated platform
   scaffolds, or deployment output changed.
+- Confirm generated platform scaffold changes came from Flutter tooling, not
+  hand-written boilerplate.
 - Verify fixture mode still runs without network access, API keys, microphone
   permissions, real recordings, or private transcripts.
 - Confirm `CHANGELOG.md` describes contributor-visible changes.
