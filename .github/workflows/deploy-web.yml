@@ -116,3 +116,11 @@ jobs:
       - name: Deploy artifact
         id: deployment
         uses: actions/deploy-pages@v5
+
+      - name: Smoke test deployed app shell
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          html="$(curl --fail --silent --show-error --location "$PAGE_URL")"
+          grep --fixed-strings '<title>Babel Fish</title>' <<< "$html"
+          grep --fixed-strings 'flutter_bootstrap.js' <<< "$html"
