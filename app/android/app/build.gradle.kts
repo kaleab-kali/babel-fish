@@ -1,11 +1,8 @@
 import com.android.build.api.dsl.ApplicationExtension
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    // The Flutter Gradle Plugin must be applied after the Android Gradle plugin.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -33,12 +30,6 @@ extensions.configure<ApplicationExtension>("android") {
             // must be configured outside git in a reviewed release pipeline.
             signingConfig = signingConfigs.getByName("debug")
         }
-    }
-}
-
-extensions.configure<KotlinAndroidProjectExtension>("kotlin") {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
