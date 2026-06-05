@@ -19,4 +19,6 @@ Use GitHub private vulnerability reporting if enabled, or contact the maintainer
 
 Provider credentials must stay outside git. Use local environment configuration and commit only safe examples such as `.env.example`.
 
+Do not commit mobile signing material or credential bundles, including `*.jks`, `*.keystore`, `*.p12`, `*.pfx`, `*.pem`, `*.key`, `*.mobileprovision`, or `*.provisionprofile` files.
+
 Run `dart tool/verify_no_secrets.dart` before opening pull requests. The same check runs in the Dart workspace GitHub Actions workflow.
