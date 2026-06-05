@@ -8,6 +8,8 @@ The app includes standard Flutter platform scaffolds for Android, iOS, Linux, ma
 
 Fixture mode should not request microphone permissions on any platform. Add platform microphone permissions only in the same reviewed change that introduces recording mode and documents the privacy behavior.
 
+Runtime mode is selected with `BABEL_FISH_MODE`. The only supported value today is `fixture`; unsupported values fail during app startup instead of silently falling back.
+
 ## Scaffold regeneration
 
 Repair or refresh generated platform files with Flutter tooling instead of hand-writing scaffold boilerplate:
@@ -25,6 +27,6 @@ flutter pub get
 dart format --set-exit-if-changed .
 dart analyze
 flutter test
-flutter build web
-flutter run -d chrome
+flutter build web --dart-define=BABEL_FISH_MODE=fixture
+flutter run -d chrome --dart-define=BABEL_FISH_MODE=fixture
 ```

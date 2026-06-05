@@ -50,7 +50,7 @@ flutter pub get
 dart format --set-exit-if-changed .
 dart analyze
 flutter test
-flutter build web --base-href "/babel-fish/"
+flutter build web --base-href "/babel-fish/" --dart-define=BABEL_FISH_MODE=fixture
 flutter build apk --debug
 cd ..
 dart tool/verify_web_build_budget.dart

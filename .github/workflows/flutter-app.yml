@@ -86,7 +86,7 @@ jobs:
 
       - name: Build web app
         working-directory: app
-        run: flutter build web
+        run: flutter build web --dart-define=BABEL_FISH_MODE=fixture
 
       - name: Verify web build size budget
         run: dart tool/verify_web_build_budget.dart

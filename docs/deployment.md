@@ -13,7 +13,7 @@ The `Deploy Web` workflow builds the Flutter app from `app/`. Pull requests run 
 
 Deployment is opt-in. Repository maintainers must configure GitHub Pages to use GitHub Actions as the source and set the repository Actions variable `BABEL_FISH_PAGES_DEPLOY` to `true`. After that variable is enabled, pushes to `main` configure GitHub Pages, upload `app/build/web` as a Pages artifact, and deploy it. The workflow can also be started manually with `workflow_dispatch` from `main`.
 
-The workflow builds the app with `--base-href "/babel-fish/"`, which matches the current repository name for project Pages URLs. After GitHub Pages publishes the artifact, the deploy job smoke-tests the live URL and fails if the published HTML does not contain the Babel Fish title and Flutter bootstrap script.
+The workflow builds the app with `--base-href "/babel-fish/"` and `--dart-define=BABEL_FISH_MODE=fixture`, which matches the current repository name for project Pages URLs and keeps the published demo in the only supported runtime mode. After GitHub Pages publishes the artifact, the deploy job smoke-tests the live URL and fails if the published HTML does not contain the Babel Fish title and Flutter bootstrap script.
 
 ## Repository readiness checklist
 
@@ -40,7 +40,7 @@ flutter pub get
 dart format --set-exit-if-changed .
 dart analyze
 flutter test
-flutter build web --base-href "/babel-fish/"
+flutter build web --base-href "/babel-fish/" --dart-define=BABEL_FISH_MODE=fixture
 cd ..
 dart tool/verify_web_build_budget.dart
 ```

@@ -5,7 +5,7 @@ and portfolio walkthroughs.
 
 ## Fixture demo
 
-1. Launch the Flutter app with `flutter run -d chrome` from `app/`.
+1. Launch the Flutter app with `flutter run -d chrome --dart-define=BABEL_FISH_MODE=fixture` from `app/`.
 2. Confirm the banner shows `Fixture mode` and the offline demo-data status.
 3. Select a source and target language pair.
 4. Press `Play fixture`.

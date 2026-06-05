@@ -6,6 +6,7 @@ The project follows a human-readable changelog. Versioning will be introduced on
 
 ## Unreleased
 
+- Added explicit Flutter app runtime mode configuration for fixture deployments.
 - Added open-source project foundation files.
 - Added initial Dart workspace and `babelfish_core` package scaffold.
 - Added `babelfish_fixtures` package with offline transcript and translation services.
