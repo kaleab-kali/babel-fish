@@ -56,3 +56,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added a Flutter fixture control for swapping supported language pairs.
 - Removed the redundant Flutter web viewport meta tag to avoid runtime warnings.
 - Added CI verification for Flutter web metadata and manifest assets.
+- Corrected deployment documentation for the web metadata verifier trigger.
