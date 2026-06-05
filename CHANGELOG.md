@@ -68,3 +68,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added Flutter widget coverage for in-flight session controls.
 - Added Flutter widget coverage for retrying after transient translation errors.
 - Aligned native platform app identity labels with Babel Fish and added CI verification.
+- Disabled persisted checkout credentials in GitHub Actions workflows.
