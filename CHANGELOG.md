@@ -58,3 +58,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added CI verification for Flutter web metadata and manifest assets.
 - Corrected deployment documentation for the web metadata verifier trigger.
 - Added CI verification that fixture app and fixture package code stay offline.
+- Added CI verification for GitHub Actions workflow security guards.

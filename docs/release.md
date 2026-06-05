@@ -25,6 +25,7 @@ For Dart package changes:
 dart pub get
 dart format --set-exit-if-changed .
 dart tool/verify_no_secrets.dart
+dart tool/verify_workflow_security.dart
 dart tool/verify_fixture_offline.dart
 dart analyze
 dart test packages/babelfish_core
