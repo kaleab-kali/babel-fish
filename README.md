@@ -2,10 +2,13 @@
 
 [![Dart Workspace](https://github.com/kaleab-kali/babel-fish/actions/workflows/dart-workspace.yml/badge.svg)](https://github.com/kaleab-kali/babel-fish/actions/workflows/dart-workspace.yml)
 [![Flutter App](https://github.com/kaleab-kali/babel-fish/actions/workflows/flutter-app.yml/badge.svg)](https://github.com/kaleab-kali/babel-fish/actions/workflows/flutter-app.yml)
+[![Deploy Web](https://github.com/kaleab-kali/babel-fish/actions/workflows/deploy-web.yml/badge.svg)](https://github.com/kaleab-kali/babel-fish/actions/workflows/deploy-web.yml)
 
 Babel Fish is an open-source Flutter prototype for real-time speech translation. It is designed to capture speech, transcribe it, translate it, and show readable captions with clear latency reporting.
 
 The project starts with deterministic fixture mode so contributors can build and test the experience without network access, paid provider accounts, or real user audio. Live transcription and translation providers will be added behind clean interfaces after the offline demo path is stable.
+
+Live fixture demo: [kaleab-kali.github.io/babel-fish](https://kaleab-kali.github.io/babel-fish/)
 
 ## Goals
 
