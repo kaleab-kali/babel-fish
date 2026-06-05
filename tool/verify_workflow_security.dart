@@ -61,6 +61,20 @@ void _verifyWorkflow(String path, String contents, List<String> violations) {
     violations.add('$path: missing explicit top-level permissions block.');
   }
 
+  final checkoutCount = RegExp(
+    r'^\s*uses:\s*actions/checkout@',
+    multiLine: true,
+  ).allMatches(contents).length;
+  final persistedCredentialCount = RegExp(
+    r'^\s*persist-credentials:\s*false\s*$',
+    multiLine: true,
+  ).allMatches(contents).length;
+  if (checkoutCount != persistedCredentialCount) {
+    violations.add(
+      '$path: each actions/checkout step must set persist-credentials: false.',
+    );
+  }
+
   final runsOnCount = RegExp(
     r'^\s*runs-on:\s+',
     multiLine: true,
