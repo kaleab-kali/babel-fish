@@ -3,8 +3,10 @@ import 'package:babelfish_fixtures/babelfish_fixtures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'src/runtime_config.dart';
+
 void main() {
-  runApp(const BabelFishApp());
+  runApp(BabelFishApp(runtimeConfig: BabelFishRuntimeConfig.fromEnvironment()));
 }
 
 const _maxCaptionHistoryItems = 10;
@@ -12,7 +14,12 @@ const _maxCaptionHistoryItems = 10;
 enum _SessionFailureStage { capture, transcription, translation }
 
 class BabelFishApp extends StatelessWidget {
-  const BabelFishApp({super.key});
+  const BabelFishApp({
+    super.key,
+    this.runtimeConfig = const BabelFishRuntimeConfig.fixture(),
+  });
+
+  final BabelFishRuntimeConfig runtimeConfig;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +30,9 @@ class BabelFishApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0F766E)),
         useMaterial3: true,
       ),
-      home: const FixtureCaptionPage(),
+      home: switch (runtimeConfig.mode) {
+        BabelFishRuntimeMode.fixture => const FixtureCaptionPage(),
+      },
     );
   }
 }

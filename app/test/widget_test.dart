@@ -7,7 +7,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:babel_fish_app/src/runtime_config.dart';
+
 void main() {
+  test('defaults to fixture runtime mode', () {
+    final config = BabelFishRuntimeConfig.fromEnvironment();
+
+    expect(config.mode, BabelFishRuntimeMode.fixture);
+  });
+
+  test('accepts explicit fixture runtime mode', () {
+    final config = BabelFishRuntimeConfig.fromEnvironment(mode: 'fixture');
+
+    expect(config.mode, BabelFishRuntimeMode.fixture);
+  });
+
+  test('rejects unsupported runtime modes', () {
+    expect(
+      () => BabelFishRuntimeConfig.fromEnvironment(mode: 'live'),
+      throwsUnsupportedError,
+    );
+  });
+
   testWidgets('plays the fixture caption flow', (tester) async {
     await tester.pumpWidget(const BabelFishApp());
 
