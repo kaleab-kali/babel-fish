@@ -78,6 +78,7 @@ Run the current checks:
 dart format --set-exit-if-changed .
 dart tool/verify_no_secrets.dart
 dart tool/verify_workflow_security.dart
+dart tool/verify_pubspec_metadata.dart
 dart tool/verify_fixture_offline.dart
 dart tool/verify_markdown_links.dart
 dart analyze

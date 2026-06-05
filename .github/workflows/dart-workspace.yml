@@ -40,6 +40,9 @@ jobs:
       - name: Verify workflow security
         run: dart tool/verify_workflow_security.dart
 
+      - name: Verify pubspec metadata
+        run: dart tool/verify_pubspec_metadata.dart
+
       - name: Verify fixture offline mode
         run: dart tool/verify_fixture_offline.dart
 

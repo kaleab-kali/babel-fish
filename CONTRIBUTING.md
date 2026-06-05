@@ -26,6 +26,7 @@ For current Dart package work, run:
 dart format --set-exit-if-changed .
 dart tool/verify_no_secrets.dart
 dart tool/verify_workflow_security.dart
+dart tool/verify_pubspec_metadata.dart
 dart tool/verify_fixture_offline.dart
 dart tool/verify_markdown_links.dart
 dart analyze
@@ -67,6 +68,7 @@ Maintainer release checks are documented in [docs/release.md](docs/release.md).
 - README or docs are updated when setup, behavior, privacy, or limitations change.
 - `dart tool/verify_no_secrets.dart` passes.
 - `dart tool/verify_workflow_security.dart` passes after GitHub Actions changes.
+- `dart tool/verify_pubspec_metadata.dart` passes after package manifest changes.
 - `dart tool/verify_fixture_offline.dart` passes after fixture app or fixture package changes.
 - `dart tool/verify_markdown_links.dart` passes after documentation changes.
 - `dart tool/verify_web_metadata.dart` passes after Flutter web metadata changes.
