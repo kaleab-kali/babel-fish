@@ -411,12 +411,16 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester.scrollUntilVisible(
-      find.textContaining('translation unavailable'),
+      find.text('Translation failed. Try the fixture again.'),
       300,
     );
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('translation unavailable'), findsOneWidget);
+    expect(
+      find.text('Translation failed. Try the fixture again.'),
+      findsOneWidget,
+    );
+    expect(find.textContaining('translation unavailable'), findsNothing);
     expect(find.textContaining('Session failed'), findsOneWidget);
     expect(find.text('No translated caption yet.'), findsOneWidget);
   });
@@ -436,12 +440,16 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester.scrollUntilVisible(
-      find.textContaining('temporary translation outage'),
+      find.text('Translation failed. Try the fixture again.'),
       300,
     );
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('temporary translation outage'), findsOneWidget);
+    expect(
+      find.text('Translation failed. Try the fixture again.'),
+      findsOneWidget,
+    );
+    expect(find.textContaining('temporary translation outage'), findsNothing);
     expect(find.textContaining('Session failed'), findsOneWidget);
 
     await tester.scrollUntilVisible(find.byIcon(Icons.mic), -300);
@@ -450,7 +458,10 @@ void main() {
     await tester.tap(find.byIcon(Icons.mic));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('temporary translation outage'), findsNothing);
+    expect(
+      find.text('Translation failed. Try the fixture again.'),
+      findsNothing,
+    );
     expect(find.textContaining('Session completed'), findsOneWidget);
     expect(find.text('No translated caption yet.'), findsNothing);
   });
@@ -468,12 +479,16 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester.scrollUntilVisible(
-      find.textContaining('transcription unavailable'),
+      find.text('Transcription failed. Try the fixture again.'),
       300,
     );
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('transcription unavailable'), findsOneWidget);
+    expect(
+      find.text('Transcription failed. Try the fixture again.'),
+      findsOneWidget,
+    );
+    expect(find.textContaining('transcription unavailable'), findsNothing);
     expect(find.textContaining('Session failed'), findsOneWidget);
     expect(find.text('No source caption yet.'), findsOneWidget);
     expect(find.text('No translated caption yet.'), findsOneWidget);
@@ -492,12 +507,20 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester.scrollUntilVisible(
-      find.textContaining('audio capture unavailable'),
+      find.text(
+        'Audio capture failed. Fixture mode did not record or send audio.',
+      ),
       300,
     );
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('audio capture unavailable'), findsOneWidget);
+    expect(
+      find.text(
+        'Audio capture failed. Fixture mode did not record or send audio.',
+      ),
+      findsOneWidget,
+    );
+    expect(find.textContaining('audio capture unavailable'), findsNothing);
     expect(find.textContaining('Session failed'), findsOneWidget);
     expect(find.text('No source caption yet.'), findsOneWidget);
     expect(find.text('No translated caption yet.'), findsOneWidget);

@@ -9,6 +9,8 @@ void main() {
 
 const _maxCaptionHistoryItems = 10;
 
+enum _SessionFailureStage { capture, transcription, translation }
+
 class BabelFishApp extends StatelessWidget {
   const BabelFishApp({super.key});
 
@@ -173,6 +175,7 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
 
   Future<void> _playFixture() async {
     final captureStartedAt = DateTime.now().toUtc();
+    var failureStage = _SessionFailureStage.capture;
     final session = SpeechSession(
       id: 'fixture-session',
       sourceLanguage: _sourceLanguage,
@@ -197,13 +200,16 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
         _session = transcribingSession;
       });
 
+      final audioBytes = widget.audioCaptureService
+          .capture(session: transcribingSession)
+          .handleError((Object error, StackTrace stackTrace) {
+            failureStage = _SessionFailureStage.capture;
+            Error.throwWithStackTrace(error, stackTrace);
+          });
+
+      failureStage = _SessionFailureStage.transcription;
       final sourceSegments = await widget.transcriptionService
-          .transcribe(
-            session: transcribingSession,
-            audioBytes: widget.audioCaptureService.capture(
-              session: transcribingSession,
-            ),
-          )
+          .transcribe(session: transcribingSession, audioBytes: audioBytes)
           .toList();
       final sourceSegment = _selectNextSegment(sourceSegments);
       final transcriptAvailableAt = DateTime.now().toUtc();
@@ -221,6 +227,7 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
         _session = translatingSession;
       });
 
+      failureStage = _SessionFailureStage.translation;
       final translation = await widget.translationService.translate(
         segment: sourceSegment,
         targetLanguage: _targetLanguage,
@@ -249,13 +256,13 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
         );
         _isPlaying = false;
       });
-    } on Object catch (error) {
+    } on Object catch (_) {
       if (!mounted) {
         return;
       }
 
       setState(() {
-        _error = error.toString();
+        _error = _failureMessageFor(failureStage);
         _session = (_session ?? session).copyWith(
           endedAt: DateTime.now().toUtc(),
           status: SpeechSessionStatus.failed,
@@ -263,6 +270,17 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
         _isPlaying = false;
       });
     }
+  }
+
+  String _failureMessageFor(_SessionFailureStage stage) {
+    return switch (stage) {
+      _SessionFailureStage.capture =>
+        'Audio capture failed. Fixture mode did not record or send audio.',
+      _SessionFailureStage.transcription =>
+        'Transcription failed. Try the fixture again.',
+      _SessionFailureStage.translation =>
+        'Translation failed. Try the fixture again.',
+    };
   }
 
   @override
