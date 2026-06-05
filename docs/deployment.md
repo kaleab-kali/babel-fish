@@ -10,6 +10,18 @@ Deployment is opt-in. Repository maintainers must configure GitHub Pages to use 
 
 The workflow builds the app with `--base-href "/babel-fish/"`, which matches the current repository name for project Pages URLs.
 
+## Repository readiness checklist
+
+Before enabling production Pages deployment:
+
+- Confirm the `Dart Workspace`, `Flutter App`, and `Deploy Web` workflows pass on `main`.
+- In repository settings, set Pages source to GitHub Actions.
+- Add an Actions repository variable named `BABEL_FISH_PAGES_DEPLOY` with the value `true`.
+- Run the `Deploy Web` workflow from `main` or push a reviewed app, package, tool, or deployment workflow change.
+- Confirm the deployed Pages URL opens the fixture app without provider credentials, microphone permissions, real recordings, or private transcripts.
+
+If the GitHub Pages API reports `404`, Pages has not been configured for the repository yet. If the Actions variables list is empty or does not include `BABEL_FISH_PAGES_DEPLOY=true`, deployment remains intentionally disabled even though build validation still runs.
+
 ## Pre-deploy checks
 
 The deployment workflow runs:

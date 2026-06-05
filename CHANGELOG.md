@@ -63,3 +63,4 @@ The project follows a human-readable changelog. Versioning will be introduced on
 - Added Flutter widget coverage for responsive language controls.
 - Added CI verification for pubspec repository metadata.
 - Documented the Flutter platform scaffold regeneration command.
+- Clarified GitHub Pages deployment readiness and troubleshooting guidance.
