@@ -24,5 +24,6 @@ coverage/
 reports/
 
 # Local demo artifacts
+.playwright-cli/
 docs/screenshots/local/
 recordings/
