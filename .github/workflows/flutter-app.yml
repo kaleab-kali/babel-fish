@@ -23,6 +23,9 @@ on:
       - tool/verify_web_metadata.dart
       - tool/verify_web_build_budget.dart
       - .github/workflows/flutter-app.yml
+  schedule:
+    - cron: "37 6 * * 1"
+  workflow_dispatch:
 
 permissions:
   contents: read
