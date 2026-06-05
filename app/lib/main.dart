@@ -7,6 +7,8 @@ void main() {
   runApp(const BabelFishApp());
 }
 
+const _maxCaptionHistoryItems = 10;
+
 class BabelFishApp extends StatelessWidget {
   const BabelFishApp({super.key});
 
@@ -232,6 +234,9 @@ class _FixtureCaptionPageState extends State<FixtureCaptionPage> {
       setState(() {
         _translation = translation;
         _history.insert(0, translation);
+        if (_history.length > _maxCaptionHistoryItems) {
+          _history.removeRange(_maxCaptionHistoryItems, _history.length);
+        }
         _session = translatingSession.copyWith(
           endedAt: translationAvailableAt,
           status: SpeechSessionStatus.completed,
